@@ -12,8 +12,11 @@ export const GetCountries = async () => {
    },
   });
   const data = response.data.response;
-  console.log(data);
-  return data;
+  const options = data.map((item) => ({
+   value: item.name,
+   label: item.name,
+  }));
+  return options;
  } catch (error) {
   console.log("", error);
  }
