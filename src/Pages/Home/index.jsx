@@ -6,6 +6,7 @@ import AsyncSelect, { useAsync } from "react-select/async";
 
 export const Home = () => {
  const { isLoading, data /* error */ } = useAsync(GetCountries);
+ const { isLoadingLeague, dataLeague /* error */ } = useAsync(GetLeagues);
  const [selectedCountryOption, setSelectedCountryOption] = useState("");
 
  const handleSelectChange = (option) => {
@@ -38,6 +39,14 @@ export const Home = () => {
    {selectedCountryOption && (
     <div className={style.navBarLeagues}>
      <label>Leagues</label>
+     <AsyncSelect
+      cacheOptions
+      defaultOptions
+      loadOptions={GetLeagues}
+      isLoading={isLoadingLeague}
+      options={dataLeague}
+      isClearable
+     />
     </div>
    )}
    <div className={style.containerButton}>
