@@ -1,11 +1,11 @@
 import { API } from "../API/api";
 
-export const GetCountries = async () => {
+export const GetLeagues = async (country) => {
  const apiKey = localStorage.getItem("apiKey");
  //fake: demo7870822.mockable.io
  //correct: v3.football.api-sports.io
  try {
-  const response = await API.get("/countries", {
+  const response = await API.get(`/leagues?search=${country}`, {
    headers: {
     "x-rapidapi-key": `${apiKey}`,
     "x-rapidapi-host": "v3.football.api-sports.io",

@@ -1,13 +1,10 @@
 import style from "./style.module.css";
 import { GetCountries } from "../../services/GetCountries";
+import { GetLeagues } from "../../services/GetLeagues";
 import { useEffect, useState } from "react";
 import AsyncSelect, { useAsync } from "react-select/async";
 
 export const Home = () => {
- useEffect(() => {
-  GetCountries();
- }, []);
-
  const { isLoading, data /* error */ } = useAsync(GetCountries);
  const [selectedCountryOption, setSelectedCountryOption] = useState("");
 
@@ -17,6 +14,12 @@ export const Home = () => {
  const handleClearSelect = () => {
   setSelectedCountryOption("");
  };
+ useEffect(() => {
+  GetCountries();
+  if (selectedCountryOption !== "") {
+   GetLeagues(selectedCountryOption);
+  }
+ }, [selectedCountryOption]);
 
  return (
   <div className={style.container}>
