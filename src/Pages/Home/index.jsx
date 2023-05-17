@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import AsyncSelect, { useAsync } from "react-select/async";
 import { GetSeasons } from "../../services/GetSeasons";
 import { GetTeams } from "../../services/GetTeams";
+import { PlayersList } from "../../components/PlayersList";
+import { GetPlayers } from "../../services/GetPlayers";
 
 export const Home = () => {
  const { isLoading, data /* error */ } = useAsync(GetCountries);
@@ -13,7 +15,8 @@ export const Home = () => {
  const { isLoadingSeasons, dataSeasons /* error */ } = useAsync(GetSeasons);
  const [selectedCountryOption, setSelectedCountryOption] = useState("");
  const [selectedLeagueOption, setSelectedLeagueOption] = useState("");
- /* const [selectedTeamOption, setSelectedTeamOption] = useState(""); */
+ const [selectedTeamOption, setSelectedTeamOption] = useState("");
+ const [players, setPlayers] = useState([]);
 
  const handleSelectChange = (option) => {
   setSelectedCountryOption(option.value);
@@ -22,10 +25,19 @@ export const Home = () => {
   await GetTeams(option.value);
   return setSelectedLeagueOption(option.value);
  };
- /* const handleSelectChangeTeam = async (option) => {
-  await GetPlayers(option.value);
-  return setSelectedTeamOption(option.value);
- }; */
+ const handleSelectChangeTeam = (option) => {
+  const fetchPlayers = async () => {
+   try {
+    const list = await GetPlayers(option.value);
+    setPlayers(list);
+   } catch (error) {
+    console.log("Erro ao obter a lista de jogadores:", error);
+   }
+  };
+
+  fetchPlayers();
+  setSelectedTeamOption(option.value);
+ };
 
  const handleClearSelect = () => {
   setSelectedCountryOption("");
@@ -90,8 +102,15 @@ export const Home = () => {
       loadOptions={GetTeams}
       isLoading={isLoadingTeams}
       options={dataTeams}
+      onChange={handleSelectChangeTeam}
       isClearable
      />
+    </div>
+   )}
+   {selectedTeamOption && (
+    <div>
+     {console.log(players)}
+     <PlayersList players={players} />
     </div>
    )}
    <div className={style.containerButton}>
