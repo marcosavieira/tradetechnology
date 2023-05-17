@@ -1,6 +1,6 @@
 import { API } from "../API/api";
 
-export const getCountries = async () => {
+export const GetCountries = async () => {
  const apiKey = localStorage.getItem("apiKey");
  //fake: demo7870822.mockable.io
  //correct: v3.football.api-sports.io
@@ -12,7 +12,7 @@ export const getCountries = async () => {
    },
   });
   const data = response.data.response;
-
+  console.log(data);
   return data;
  } catch (error) {
   console.log("", error);
