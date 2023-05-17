@@ -13,8 +13,8 @@ export const GetSeasons = async () => {
   });
   const data = response.data.response;
   const options = data.map((item) => ({
-   value: item.name,
-   label: item.name,
+   value: item,
+   label: item,
   }));
   return options;
  } catch (error) {
