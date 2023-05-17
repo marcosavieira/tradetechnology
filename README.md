@@ -1,11 +1,11 @@
 Desenvolvimento
 
 -Criar a página de login.
-[]Criar a lógica de autenticação utilizando a API key.
-[]Desenvolva a funcionalidade de visualizar países e selecionar um país.
+[X]Criar a lógica de autenticação utilizando a API key.
+[X]Desenvolva a funcionalidade de visualizar países e selecionar um país.
 
 -Utilizar a API para carregar a lista de países.
-[]Implementar a interface para exibir os países e permitir a seleção de um país.
+[X]Implementar a interface para exibir os países e permitir a seleção de um país.
 []Implementar a funcionalidade de escolher uma temporada.
 
 -Garantir que um país esteja selecionado antes de permitir a seleção da temporada.
