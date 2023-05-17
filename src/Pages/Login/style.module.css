@@ -1,0 +1,36 @@
+.container {
+ display: flex;
+ width: 100vw;
+ height: 100vh;
+}
+
+.sidebarBackground {
+ background-image: url("../../assets/signIn-image.png");
+ background-size: cover;
+ background-position: center;
+ background-repeat: no-repeat;
+ width: 50vw;
+ height: 100vh;
+}
+
+.loginFormContainer {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ width: 50vw;
+ height: 100vh;
+}
+
+.loginFormContainer > form {
+ display: flex;
+ flex-direction: column;
+ gap: 0.5rem;
+ width: 20rem;
+}
+
+.loginFormContainer form > input {
+ padding: 0.5rem;
+ border-radius: 5px;
+ height: 1.5rem;
+}
