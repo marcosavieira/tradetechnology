@@ -1,0 +1,19 @@
+.container {
+ width: 100vw;
+ height: 100vh;
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+ flex-wrap: wrap;
+}
+
+.navBarCountries {
+ display: flex;
+ flex-direction: column;
+ gap: 0.6rem;
+ position: relative;
+ left: 10rem;
+ top: 5rem;
+ width: 30rem;
+ height: 5rem;
+}
