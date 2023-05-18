@@ -3,6 +3,7 @@ import style from "../../Pages/Home/style.module.css";
 export const PlayersList = ({ players }) => {
  return (
   <div>
+   <strong style={{ color: "gray" }}>Jogadores</strong>
    <table className={style.table}>
     <thead className={style.tableHeader}>
      <tr className={style.tableHeaderTr}>

@@ -7,6 +7,8 @@ import { GetSeasons } from "../../services/GetSeasons";
 import { GetTeams } from "../../services/GetTeams";
 import { PlayersList } from "../../components/PlayersList";
 import { GetPlayers } from "../../services/GetPlayers";
+import { GetStatistics } from "../../services/GetStatistics";
+import { TeamStatistics } from "../../components/TeamStatistics";
 
 export const Home = () => {
  const { isLoading, data /* error */ } = useAsync(GetCountries);
@@ -17,6 +19,7 @@ export const Home = () => {
  const [selectedLeagueOption, setSelectedLeagueOption] = useState("");
  const [selectedTeamOption, setSelectedTeamOption] = useState("");
  const [players, setPlayers] = useState([]);
+ const [statistics, setStatistics] = useState([]);
 
  const handleSelectChange = (option) => {
   setSelectedCountryOption(option.value);
@@ -29,7 +32,9 @@ export const Home = () => {
   const fetchPlayers = async () => {
    try {
     const list = await GetPlayers(option.value);
+    const statisticsList = await GetStatistics();
     setPlayers(list);
+    setStatistics(statisticsList);
    } catch (error) {
     console.log("Erro ao obter a lista de jogadores:", error);
    }
@@ -41,6 +46,7 @@ export const Home = () => {
 
  const handleClearSelect = () => {
   setSelectedCountryOption("");
+  setSelectedTeamOption("");
  };
  const fetchData = async () => {
   await GetCountries();
@@ -108,9 +114,9 @@ export const Home = () => {
     </div>
    )}
    {selectedTeamOption && (
-    <div>
-     {console.log(players)}
+    <div style={{ display: "flex", flexDirection: "row", gap: "40px" }}>
      <PlayersList players={players} />
+     <TeamStatistics formation={statistics} />
     </div>
    )}
    <div className={style.containerButton}>
