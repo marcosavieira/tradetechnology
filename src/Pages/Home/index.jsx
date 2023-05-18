@@ -89,9 +89,9 @@ export const Home = () => {
      isClearable
     />
    </div>
-   {selectedCountryOption && (
-    <div className={style.navBarLeagues}>
-     <label>Leagues</label>
+   <div className={style.navBarLeagues}>
+    <label>Leagues</label>
+    {selectedCountryOption && (
      <AsyncSelect
       cacheOptions
       defaultOptions
@@ -101,11 +101,11 @@ export const Home = () => {
       onChange={handleSelectChangeLeague}
       isClearable
      />
-    </div>
-   )}
-   {selectedLeagueOption && (
-    <div className={style.navBarLeagues}>
-     <label>Times</label>
+    )}
+   </div>
+   <div className={style.navBarLeagues}>
+    <label>Times</label>
+    {selectedLeagueOption && (
      <AsyncSelect
       cacheOptions
       defaultOptions
@@ -115,15 +115,25 @@ export const Home = () => {
       onChange={handleSelectChangeTeam}
       isClearable
      />
-    </div>
-   )}
-   {selectedTeamOption && (
-    <div style={{ display: "flex", flexDirection: "row", gap: "40px" }}>
-     <PlayersList players={players} />
-     <TeamStatistics formation={formation} />
-     {console.log(fixtures)}
-    </div>
-   )}
+    )}
+   </div>
+   <div
+    style={{
+     display: "flex",
+     flexDirection: "row",
+     gap: "40px",
+     width: "20rem",
+     height: "20rem",
+    }}
+   >
+    {selectedTeamOption && (
+     <>
+      <PlayersList players={players} />
+      <TeamStatistics formation={formation} />
+     </>
+    )}
+    {console.log(fixtures)}
+   </div>
    <div className={style.containerButton}>
     <button onClick={handleClearSelect}>Limpar</button>
    </div>
