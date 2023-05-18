@@ -16,14 +16,7 @@ export const GetStatistics = async (/* team, league, season */) => {
   );
   const dataStatics = response.data.response;
   const lineups = dataStatics.lineups;
-  //const fixtures = dataStatics.fixtures;
-
-  /*  const fixturesTeam = fixtures.map((fixture) => ({
-   played: fixture.played.total,
-   wins: fixture.wins.total,
-   loses: fixture.loses.total,
-   draws: fixture.draws.total,
-  })); */
+  const fixtures = dataStatics.fixtures;
 
   const formationTeam = lineups.sort((a, b) => {
    if (a.played > b.played) {
@@ -35,8 +28,11 @@ export const GetStatistics = async (/* team, league, season */) => {
 
    return 0;
   });
-  console.log(formationTeam);
-  return formationTeam[0] /* { formationTeam, fixturesTeam } */;
+
+  return {
+   formation: formationTeam[0],
+   fixtures: fixtures,
+  };
  } catch (error) {
   console.log("", error);
  }

@@ -36,8 +36,8 @@ export const Home = () => {
     const formationTeam = await GetStatistics();
     //const { formationTeam, fixturesTeam } = formationList;
     setPlayers(list);
-    setFormation(formationTeam);
-    //setFixtures(fixturesTeam);
+    setFormation(formationTeam.formation);
+    setFixtures(formationTeam.fixtures);
    } catch (error) {
     console.log("Erro ao obter a lista de jogadores:", error);
    }
@@ -60,6 +60,7 @@ export const Home = () => {
   }
  };
  useEffect(() => {
+  //pesquisar useEffect async
   fetchData();
  }, []);
 
@@ -120,6 +121,7 @@ export const Home = () => {
     <div style={{ display: "flex", flexDirection: "row", gap: "40px" }}>
      <PlayersList players={players} />
      <TeamStatistics formation={formation} />
+     {console.log(fixtures)}
     </div>
    )}
    <div className={style.containerButton}>
