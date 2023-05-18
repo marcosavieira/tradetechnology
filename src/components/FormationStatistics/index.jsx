@@ -1,9 +1,11 @@
 import style from "../../Pages/Home/style.module.css";
 
-export const TeamStatistics = ({ formation }) => {
+export const FormationStatistics = ({ formation }) => {
  return (
   <div>
-   <strong style={{ color: "green" }}>Formações Mais Usadas</strong>
+   <strong style={{ color: "green", padding: "2rem" }}>
+    Formações Mais Usadas
+   </strong>
    <table className={style.table}>
     <thead className={style.tableHeader}>
      <tr className={style.tableHeaderTr}>

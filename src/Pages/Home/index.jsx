@@ -8,7 +8,8 @@ import { GetTeams } from "../../services/GetTeams";
 import { PlayersList } from "../../components/PlayersList";
 import { GetPlayers } from "../../services/GetPlayers";
 import { GetStatistics } from "../../services/GetStatistics";
-import { TeamStatistics } from "../../components/TeamStatistics";
+import { FormationStatistics } from "../../components/FormationStatistics";
+import { TeamFixtures } from "../../components/TeamFixtures";
 
 export const Home = () => {
  const { isLoading, data /* error */ } = useAsync(GetCountries);
@@ -89,9 +90,9 @@ export const Home = () => {
      isClearable
     />
    </div>
-   {selectedCountryOption && (
-    <div className={style.navBarLeagues}>
-     <label>Leagues</label>
+   <div className={style.navBarLeagues}>
+    <label>Leagues</label>
+    {selectedCountryOption && (
      <AsyncSelect
       cacheOptions
       defaultOptions
@@ -101,11 +102,11 @@ export const Home = () => {
       onChange={handleSelectChangeLeague}
       isClearable
      />
-    </div>
-   )}
-   {selectedLeagueOption && (
-    <div className={style.navBarLeagues}>
-     <label>Times</label>
+    )}
+   </div>
+   <div className={style.navBarLeagues}>
+    <label>Times</label>
+    {selectedLeagueOption && (
      <AsyncSelect
       cacheOptions
       defaultOptions
@@ -115,15 +116,30 @@ export const Home = () => {
       onChange={handleSelectChangeTeam}
       isClearable
      />
-    </div>
-   )}
-   {selectedTeamOption && (
-    <div style={{ display: "flex", flexDirection: "row", gap: "40px" }}>
-     <PlayersList players={players} />
-     <TeamStatistics formation={formation} />
-     {console.log(fixtures)}
-    </div>
-   )}
+    )}
+   </div>
+   <div
+    style={{
+     display: "flex",
+     flexDirection: "row",
+     gap: "40px",
+     width: "20rem",
+     height: "20rem",
+    }}
+   >
+    {selectedTeamOption && (
+     <>
+      <PlayersList players={players} />
+      <FormationStatistics formation={formation} />
+      <TeamFixtures
+       played={fixtures.played.total}
+       wins={fixtures.wins.total}
+       loses={fixtures.loses.total}
+       draws={fixtures.draws.total}
+      />
+     </>
+    )}
+   </div>
    <div className={style.containerButton}>
     <button onClick={handleClearSelect}>Limpar</button>
    </div>
