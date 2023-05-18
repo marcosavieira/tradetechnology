@@ -19,7 +19,8 @@ export const Home = () => {
  const [selectedLeagueOption, setSelectedLeagueOption] = useState("");
  const [selectedTeamOption, setSelectedTeamOption] = useState("");
  const [players, setPlayers] = useState([]);
- const [statistics, setStatistics] = useState([]);
+ const [formation, setFormation] = useState([]);
+ const [fixtures, setFixtures] = useState([]);
 
  const handleSelectChange = (option) => {
   setSelectedCountryOption(option.value);
@@ -32,9 +33,11 @@ export const Home = () => {
   const fetchPlayers = async () => {
    try {
     const list = await GetPlayers(option.value);
-    const statisticsList = await GetStatistics();
+    const formationTeam = await GetStatistics();
+    //const { formationTeam, fixturesTeam } = formationList;
     setPlayers(list);
-    setStatistics(statisticsList);
+    setFormation(formationTeam);
+    //setFixtures(fixturesTeam);
    } catch (error) {
     console.log("Erro ao obter a lista de jogadores:", error);
    }
@@ -116,7 +119,7 @@ export const Home = () => {
    {selectedTeamOption && (
     <div style={{ display: "flex", flexDirection: "row", gap: "40px" }}>
      <PlayersList players={players} />
-     <TeamStatistics formation={statistics} />
+     <TeamStatistics formation={formation} />
     </div>
    )}
    <div className={style.containerButton}>
