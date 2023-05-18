@@ -12,12 +12,10 @@ export const TeamStatistics = ({ formation }) => {
      </tr>
     </thead>
     <tbody>
-     {formation.map((item) => (
-      <tr className={style.tableBodyTr} key={item.formation}>
-       <td>{item.formation}</td>
-       <td>{item.played}</td>
-      </tr>
-     ))}
+     <tr className={style.tableBodyTr}>
+      <td>{formation.formation}</td>
+      <td>{formation.played}</td>
+     </tr>
     </tbody>
    </table>
   </div>

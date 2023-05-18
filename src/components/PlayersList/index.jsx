@@ -7,7 +7,6 @@ export const PlayersList = ({ players }) => {
    <table className={style.table}>
     <thead className={style.tableHeader}>
      <tr className={style.tableHeaderTr}>
-      <th>Id</th>
       <th>Nome</th>
       <th>Idade</th>
       <th>Nacionalidade</th>
@@ -16,7 +15,6 @@ export const PlayersList = ({ players }) => {
     <tbody>
      {players.map((item) => (
       <tr className={style.tableBodyTr} key={item.id}>
-       <td>{item.id}</td>
        <td>{item.nome}</td>
        <td>{item.idade}</td>
        <td>{item.nacionalidade}</td>

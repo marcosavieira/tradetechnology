@@ -16,13 +16,27 @@ export const GetStatistics = async (/* team, league, season */) => {
   );
   const dataStatics = response.data.response;
   const lineups = dataStatics.lineups;
+  //const fixtures = dataStatics.fixtures;
 
-  const formationTeam = lineups.map((lineup) => ({
-   formation: lineup.formation,
-   played: lineup.played,
-  }));
+  /*  const fixturesTeam = fixtures.map((fixture) => ({
+   played: fixture.played.total,
+   wins: fixture.wins.total,
+   loses: fixture.loses.total,
+   draws: fixture.draws.total,
+  })); */
 
-  return formationTeam;
+  const formationTeam = lineups.sort((a, b) => {
+   if (a.played > b.played) {
+    return -1;
+   }
+   if (a.played < b.played) {
+    return 1;
+   }
+
+   return 0;
+  });
+  console.log(formationTeam);
+  return formationTeam[0] /* { formationTeam, fixturesTeam } */;
  } catch (error) {
   console.log("", error);
  }

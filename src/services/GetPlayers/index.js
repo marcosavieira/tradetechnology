@@ -12,7 +12,6 @@ export const GetPlayers = async (/* team */) => {
    },
   });
   const data = response.data.response;
-  console.log(data);
   const list = data.map((item) => ({
    id: item.player.id,
    nome: item.player.name,

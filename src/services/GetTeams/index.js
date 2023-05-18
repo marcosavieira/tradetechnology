@@ -12,7 +12,6 @@ export const GetTeams = async (/* league */) => {
    },
   });
   const data = response.data.response;
-  console.log(data);
   const options = data.map((item) => ({
    value: item.team.id,
    label: item.team.name,

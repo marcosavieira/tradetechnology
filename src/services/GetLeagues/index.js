@@ -12,7 +12,6 @@ export const GetLeagues = async (/* country */) => {
    },
   });
   const data = response.data.response;
-  console.log(data);
   const options = data.map((item) => ({
    value: item.league.id,
    label: item.league.name,
