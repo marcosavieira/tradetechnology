@@ -1,6 +1,6 @@
 import style from "../../Pages/Home/style.module.css";
 
-export const TeamStatistics = ({ formation }) => {
+export const FormationStatistics = ({ formation }) => {
  return (
   <div>
    <strong style={{ color: "green", padding: "2rem" }}>

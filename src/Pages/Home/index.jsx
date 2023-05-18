@@ -8,7 +8,8 @@ import { GetTeams } from "../../services/GetTeams";
 import { PlayersList } from "../../components/PlayersList";
 import { GetPlayers } from "../../services/GetPlayers";
 import { GetStatistics } from "../../services/GetStatistics";
-import { TeamStatistics } from "../../components/TeamStatistics";
+import { FormationStatistics } from "../../components/FormationStatistics";
+import { TeamFixtures } from "../../components/TeamFixtures";
 
 export const Home = () => {
  const { isLoading, data /* error */ } = useAsync(GetCountries);
@@ -129,10 +130,15 @@ export const Home = () => {
     {selectedTeamOption && (
      <>
       <PlayersList players={players} />
-      <TeamStatistics formation={formation} />
+      <FormationStatistics formation={formation} />
+      <TeamFixtures
+       played={fixtures.played.total}
+       wins={fixtures.wins.total}
+       loses={fixtures.loses.total}
+       draws={fixtures.draws.total}
+      />
      </>
     )}
-    {console.log(fixtures)}
    </div>
    <div className={style.containerButton}>
     <button onClick={handleClearSelect}>Limpar</button>
