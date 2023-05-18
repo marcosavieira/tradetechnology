@@ -60,6 +60,7 @@ export const Home = () => {
   }
  };
  useEffect(() => {
+  //pesquisar useEffect async
   fetchData();
  }, []);
 

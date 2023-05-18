@@ -2,19 +2,24 @@ import { useNavigate } from "react-router-dom";
 import { GetStatus } from "../../services/GetStatus";
 import style from "./style.module.css";
 import { useForm } from "react-hook-form";
+import { ToastContainer } from "react-toastify";
 
 export const Login = () => {
  const { register, handleSubmit } = useForm();
  const navigate = useNavigate();
  const onSubmit = async (data) => {
   GetStatus(data);
-  if (localStorage.getItem("apiKey") !== "") {
-   navigate("/home");
-  }
+
+  setTimeout(() => {
+   if (localStorage.getItem("apiKey")) {
+    navigate("/home");
+   }
+  }, 2000);
  };
 
  return (
   <div className={style.container}>
+   <ToastContainer />
    <div className={style.sidebarBackground} />
    <div className={style.loginFormContainer}>
     <h1>Meu Time</h1>
