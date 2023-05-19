@@ -10,139 +10,205 @@ import { GetPlayers } from "../../services/GetPlayers";
 import { GetStatistics } from "../../services/GetStatistics";
 import { FormationStatistics } from "../../components/FormationStatistics";
 import { TeamFixtures } from "../../components/TeamFixtures";
+import { TeamChart } from "../../components/TeamChart";
 
 export const Home = () => {
- const { isLoading, data /* error */ } = useAsync(GetCountries);
- const { isLoadingLeague, dataLeague /* error */ } = useAsync(GetLeagues);
- const { isLoadingTeams, dataTeams /* error */ } = useAsync(GetTeams);
- const { isLoadingSeasons, dataSeasons /* error */ } = useAsync(GetSeasons);
- const [selectedCountryOption, setSelectedCountryOption] = useState("");
- const [selectedLeagueOption, setSelectedLeagueOption] = useState("");
- const [selectedTeamOption, setSelectedTeamOption] = useState("");
- const [players, setPlayers] = useState([]);
- const [formation, setFormation] = useState([]);
- const [fixtures, setFixtures] = useState([]);
+    const { isLoading, data /* error */ } = useAsync(GetCountries);
+    const { isLoadingLeague, dataLeague /* error */ } = useAsync(GetLeagues);
+    const { isLoadingTeams, dataTeams /* error */ } = useAsync(GetTeams);
+    const { isLoadingSeasons, dataSeasons /* error */ } = useAsync(GetSeasons);
+    const [selectedLeagueOption, setSelectedLeagueOption] = useState("");
+    const [selectedTeamOption, setSelectedTeamOption] = useState("");
+    const [country, setCountry] = useState([]);
+    const [players, setPlayers] = useState([]);
+    const [formation, setFormation] = useState({});
+    const [league, setLeague] = useState([]);
+    const [leagueSelect, setLeagueSelect] = useState([]);
+    const [season, setSeason] = useState([]);
 
- const handleSelectChange = (option) => {
-  setSelectedCountryOption(option.value);
- };
- const handleSelectChangeLeague = async (option) => {
-  await GetTeams(option.value);
-  return setSelectedLeagueOption(option.value);
- };
- const handleSelectChangeTeam = (option) => {
-  const fetchPlayers = async () => {
-   try {
-    const list = await GetPlayers(option.value);
-    const formationTeam = await GetStatistics();
-    //const { formationTeam, fixturesTeam } = formationList;
-    setPlayers(list);
-    setFormation(formationTeam.formation);
-    setFixtures(formationTeam.fixtures);
-   } catch (error) {
-    console.log("Erro ao obter a lista de jogadores:", error);
-   }
-  };
+    const handleSelectChange = async (option) => {
+        if (!option) {
+            return;
+        }
+        try {
+            setCountry(option.value);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const handleSelectChangeSeason = async (option) => {
+        if (!option) {
+            return;
+        }
+        try {
+            const response = await GetLeagues(country, option.value);
+            setSeason(option.value);
+            setLeague(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const handleSelectChangeLeague = async (option) => {
+        if (!option) {
+            return;
+        }
+        try {
+            const response = await GetTeams(season, option.value);
+            setLeagueSelect(option.value);
+            setSelectedLeagueOption(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
-  fetchPlayers();
-  setSelectedTeamOption(option.value);
- };
+    const handleSelectChangeTeam = async (option) => {
+        if (!option) {
+            return;
+        }
+        try {
+            const response = await GetPlayers(season, option.value);
+            setPlayers(response);
+            setSelectedTeamOption(option.value);
+        } catch (error) {
+            console.log(error);
+        }
+        try {
+            if (leagueSelect && option.value && season) {
+                const response = await GetStatistics(
+                    leagueSelect,
+                    option.value,
+                    season
+                );
+                setFormation(response);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
- const handleClearSelect = () => {
-  setSelectedCountryOption("");
-  setSelectedTeamOption("");
- };
- const fetchData = async () => {
-  await GetCountries();
-  await GetSeasons();
+    const handleClearSelect = async () => {
+        try {
+            setLeague("");
+            setCountry("");
+            setSeason("");
+            setSelectedTeamOption("");
+            setSelectedLeagueOption("");
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
-  if (selectedCountryOption !== "") {
-   await GetLeagues(selectedCountryOption);
-  }
- };
- useEffect(() => {
-  //pesquisar useEffect async
-  fetchData();
- }, []);
+    useEffect(() => {
+        GetCountries();
+        GetSeasons();
+    }, []);
 
- return (
-  <div className={style.container}>
-   <div className={style.navBarCountries}>
-    <label>Países</label>
-    <AsyncSelect
-     cacheOptions
-     defaultOptions
-     loadOptions={GetCountries}
-     isLoading={isLoading}
-     options={data}
-     onChange={handleSelectChange}
-     isClearable
-    />
-   </div>
-   <div className={style.navBarSeasons}>
-    <label>Temporadas</label>
-    <AsyncSelect
-     cacheOptions
-     defaultOptions
-     loadOptions={GetSeasons}
-     isLoading={isLoadingSeasons}
-     options={dataSeasons}
-     isClearable
-    />
-   </div>
-   <div className={style.navBarLeagues}>
-    <label>Leagues</label>
-    {selectedCountryOption && (
-     <AsyncSelect
-      cacheOptions
-      defaultOptions
-      loadOptions={GetLeagues}
-      isLoading={isLoadingLeague}
-      options={dataLeague}
-      onChange={handleSelectChangeLeague}
-      isClearable
-     />
-    )}
-   </div>
-   <div className={style.navBarLeagues}>
-    <label>Times</label>
-    {selectedLeagueOption && (
-     <AsyncSelect
-      cacheOptions
-      defaultOptions
-      loadOptions={GetTeams}
-      isLoading={isLoadingTeams}
-      options={dataTeams}
-      onChange={handleSelectChangeTeam}
-      isClearable
-     />
-    )}
-   </div>
-   <div
-    style={{
-     display: "flex",
-     flexDirection: "row",
-     gap: "40px",
-     width: "20rem",
-     height: "20rem",
-    }}
-   >
-    {selectedTeamOption && (
-     <>
-      <PlayersList players={players} />
-      <FormationStatistics formation={formation} />
-      <TeamFixtures
-       played={fixtures.played.total}
-       wins={fixtures.wins.total}
-       loses={fixtures.loses.total}
-       draws={fixtures.draws.total}
-      />
-     </>
-    )}
-   </div>
-   <div className={style.containerButton}>
-    <button onClick={handleClearSelect}>Limpar</button>
-   </div>
-  </div>
- );
+    return (
+        <div className={style.container}>
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                    marginLeft: "5rem",
+                    width: "100%",
+                    height: "100%",
+                }}
+            >
+                <div className={style.navBarCountries}>
+                    <label>Países</label>
+                    <AsyncSelect
+                        cacheOptions
+                        defaultOptions
+                        loadOptions={GetCountries}
+                        isLoading={isLoading}
+                        options={data}
+                        onChange={handleSelectChange}
+                        isClearable
+                    />
+                </div>
+                <div className={style.navBarSeasons}>
+                    <label>Temporadas</label>
+                    <AsyncSelect
+                        cacheOptions
+                        defaultOptions
+                        loadOptions={GetSeasons}
+                        isLoading={isLoadingSeasons}
+                        options={dataSeasons}
+                        onChange={handleSelectChangeSeason}
+                        isClearable
+                    />
+                </div>
+                <div className={style.navBarLeagues}>
+                    <label>Leagues</label>
+                    {league && league.length > 0 && (
+                        <AsyncSelect
+                            cacheOptions
+                            defaultOptions
+                            loadOptions={GetLeagues}
+                            isLoading={isLoadingLeague}
+                            options={dataLeague}
+                            onChange={handleSelectChangeLeague}
+                            isClearable
+                        />
+                    )}
+                </div>
+                <div className={style.navBarLeagues}>
+                    <label>Times</label>
+                    {selectedLeagueOption && (
+                        <AsyncSelect
+                            cacheOptions
+                            defaultOptions
+                            loadOptions={GetTeams}
+                            isLoading={isLoadingTeams}
+                            options={dataTeams}
+                            onChange={handleSelectChangeTeam}
+                            isClearable
+                        />
+                    )}
+                </div>
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        gap: "40px",
+                        width: "20rem",
+                        height: "20rem",
+                    }}
+                >
+                    {selectedTeamOption && (
+                        <>
+                            <PlayersList players={players} />
+                            {formation && formation.formation && (
+                                <FormationStatistics
+                                    formation={formation.formation}
+                                />
+                            )}
+                            {formation && formation.fixtures && (
+                                <TeamFixtures
+                                    played={formation.fixtures.played.total}
+                                    wins={formation.fixtures.wins.total}
+                                    loses={formation.fixtures.loses.total}
+                                    draws={formation.fixtures.draws.total}
+                                />
+                            )}
+                        </>
+                    )}
+                </div>
+                {selectedTeamOption && formation && formation.goals && (
+                    <TeamChart
+                        timeA={formation.goals["0-15"].percentage}
+                        timeB={formation.goals["16-30"].percentage}
+                        timeC={formation.goals["31-45"].percentage}
+                        timeD={formation.goals["46-60"].percentage}
+                        timeE={formation.goals["61-75"].percentage}
+                        timeF={formation.goals["76-90"].percentage}
+                    />
+                )}
+                <div className={style.containerButton}>
+                    <button onClick={handleClearSelect}>Limpar</button>
+                </div>
+            </div>
+        </div>
+    );
 };

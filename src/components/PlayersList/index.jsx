@@ -2,7 +2,9 @@ import style from "../../Pages/Home/style.module.css";
 
 export const PlayersList = ({ players }) => {
  return (
-  <div>
+  <div
+   style={{ width: "fit-content", height: "fit-content", border: "1px solid" }}
+  >
    <strong style={{ color: "gray", padding: "2rem" }}>Jogadores</strong>
    <table className={style.table}>
     <thead className={style.tableHeader}>
