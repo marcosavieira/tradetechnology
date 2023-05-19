@@ -2,7 +2,9 @@ import style from "../../Pages/Home/style.module.css";
 
 export const FormationStatistics = ({ formation }) => {
  return (
-  <div>
+  <div
+   style={{ width: "fit-content", height: "fit-content", border: "1px solid" }}
+  >
    <strong style={{ color: "green", padding: "2rem" }}>
     Formações Mais Usadas
    </strong>

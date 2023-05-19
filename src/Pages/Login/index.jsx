@@ -3,6 +3,8 @@ import { GetStatus } from "../../services/GetStatus";
 import style from "./style.module.css";
 import { useForm } from "react-hook-form";
 import { ToastContainer } from "react-toastify";
+import { GetCountries } from "../../services/GetCountries";
+import { GetSeasons } from "../../services/GetSeasons";
 
 export const Login = () => {
  const { register, handleSubmit } = useForm();
@@ -11,7 +13,7 @@ export const Login = () => {
   GetStatus(data);
 
   setTimeout(() => {
-   if (localStorage.getItem("apiKey")) {
+   if (localStorage.length > 0) {
     navigate("/home");
    }
   }, 2000);

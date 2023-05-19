@@ -1,0 +1,37 @@
+{
+ "get": "countries",
+
+ "errors": [],
+ "results": 5,
+ "paging": {
+  "current": 1,
+  "total": 1
+ },
+ "response": [
+  {
+   "name": "England",
+   "code": "GB",
+   "flag": "https://flags/gb.svg"
+  },
+  {
+   "name": "Argentina",
+   "code": "AR",
+   "flag": "https://flags/ar.svg"
+  },
+  {
+   "name": "Portugal",
+   "code": "PO",
+   "flag": "https://flags/po.svg"
+  },
+  {
+   "name": "Spanish",
+   "code": "SP",
+   "flag": "https://media.api-sports.io/flags/sp.svg"
+  },
+  {
+   "name": "Brazil",
+   "code": "BR",
+   "flag": "https://media.api-sports.io/flags/br.svg"
+  }
+ ]
+}
