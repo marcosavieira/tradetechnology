@@ -1,63 +1,66 @@
 .container {
- width: 100vw;
- max-width: 90vw;
- height: 100vh;
- display: flex;
- flex-direction: row;
- flex-wrap: wrap;
- overflow: hidden;
+    width: 100vw;
+    max-width: 90vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow: hidden;
+    margin-top: 2rem;
+    margin-left: 3rem;
+    background-color: chartreuse;
 }
 
 .navBarCountries,
 .navBarLeagues,
 .navBarSeasons {
- display: flex;
- align-items: center;
- flex-direction: column;
- gap: 1rem;
- width: 10rem;
- height: 5rem;
- padding: 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    width: 10rem;
+    height: 5rem;
+    padding: 2rem;
 }
 
 .containerButton {
- display: flex;
- height: max-content;
- width: max-content;
- position: absolute;
- bottom: 4rem;
- left: 4rem;
+    display: flex;
+    height: max-content;
+    width: max-content;
+    position: absolute;
+    bottom: 4rem;
+    left: 4rem;
 }
 .table {
- height: 8rem;
- display: flex;
- flex-direction: column;
- overflow: auto;
- gap: 1rem;
- width: 20rem;
- padding: 2rem;
+    height: 8rem;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    gap: 1rem;
+    width: 20rem;
+    padding: 2rem;
 }
 
 .table > thead {
- display: flex;
- width: 100%;
+    display: flex;
+    width: 100%;
 }
 
 .tableHeaderTr {
- display: flex;
- width: 100%;
- gap: 1rem;
- justify-content: space-between;
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    justify-content: space-between;
 }
 
 .tableBodyTr {
- display: flex;
- width: 100%;
- justify-content: space-between;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .tableBodyTr > td {
- width: fit-content;
- display: flex;
- align-items: flex-start;
+    width: fit-content;
+    display: flex;
+    align-items: flex-start;
 }
