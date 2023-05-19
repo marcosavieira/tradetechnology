@@ -1,0 +1,43 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    height: 3rem;
+    border-bottom: 1px solid black;
+    margin-left: 5rem;
+    transition: opacity 0.5s ease;
+}
+
+header span {
+    font-family: "Arial", sans-serif;
+    font-size: 24px;
+    color: green;
+    text-shadow: 0 0 10px green;
+    font-size: 1.5rem;
+    padding: 2rem;
+}
+
+.loading {
+    position: absolute;
+    top: 1.5rem;
+    left: 30rem;
+    width: 3rem;
+    height: 3rem;
+    animation: girar 2s infinite linear;
+}
+
+.loading > img {
+    width: 30px;
+    height: 30px;
+}
+
+@keyframes girar {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
