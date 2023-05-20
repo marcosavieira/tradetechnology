@@ -24,16 +24,18 @@ export const Header = () => {
 
     return (
         <>
-            {name ? (
-                <header>
-                    <span>Meu Time</span>
-                    <span>{name.firstname}</span>
-                </header>
-            ) : (
-                <div className={style.loading}>
-                    <img src={ball} alt="" />
-                </div>
-            )}
+            <header>
+                {name ? (
+                    <>
+                        <span>Meu Time</span>
+                        <span>{name.firstname}</span>
+                    </>
+                ) : (
+                    <div className={style.loading}>
+                        <img src={ball} alt="" />
+                    </div>
+                )}
+            </header>
         </>
     );
 };
