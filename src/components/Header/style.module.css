@@ -18,6 +18,14 @@ header span {
     padding: 2rem;
 }
 
+.containerModal {
+    display: flex;
+    margin-right: 2rem;
+    cursor: pointer;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
 .loading {
     position: absolute;
     top: 1.5rem;

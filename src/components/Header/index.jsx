@@ -77,7 +77,7 @@ export const Header = () => {
                         onClick={() =>
                             setOptionsModalHidden(!optionsModalHidden)
                         }
-                        style={{ marginRight: "2rem", cursor: "pointer" }}
+                        className={style.containerModal}
                     >
                         <ChevronIcon className={style.profileMenu} />
                         <LogoutModal
