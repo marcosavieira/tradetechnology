@@ -56,6 +56,7 @@ export const Home = () => {
         }
         try {
             const response = await GetLeagues(country, option.value);
+
             setSeason(option.value);
             setLeague(response);
         } catch (error) {
@@ -206,6 +207,7 @@ export const Home = () => {
                             <>
                                 <PlayersList
                                     team={teamName}
+                                    season={season}
                                     players={players}
                                     playerRef={playerRef}
                                 />
@@ -237,7 +239,9 @@ export const Home = () => {
                         )}
                     </div>
                     <div className={style.containerButton}>
-                        <button onClick={handleClearSelect}>Limpar</button>
+                        <button onClick={handleClearSelect}>
+                            Nova Pesquisa
+                        </button>
                     </div>
                 </div>
             </div>
