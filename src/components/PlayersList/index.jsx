@@ -1,29 +1,33 @@
-import style from "../../Pages/Home/style.module.css";
+import style from "./style.module.css";
 
-export const PlayersList = ({ players }) => {
- return (
-  <div
-   style={{ width: "fit-content", height: "fit-content", border: "1px solid" }}
-  >
-   <strong style={{ color: "gray", padding: "2rem" }}>Jogadores</strong>
-   <table className={style.table}>
-    <thead className={style.tableHeader}>
-     <tr className={style.tableHeaderTr}>
-      <th>Nome</th>
-      <th>Idade</th>
-      <th>Nacionalidade</th>
-     </tr>
-    </thead>
-    <tbody>
-     {players.map((item) => (
-      <tr className={style.tableBodyTr} key={item.id}>
-       <td>{item.nome}</td>
-       <td>{item.idade}</td>
-       <td>{item.nacionalidade}</td>
-      </tr>
-     ))}
-    </tbody>
-   </table>
-  </div>
- );
+export const PlayersList = ({ players, playerRef }) => {
+    return (
+        <div ref={playerRef} className={style.container}>
+            <strong style={{ color: "gray", marginLeft: "14%" }}>
+                Jogadores
+            </strong>
+            <table className={style.table}>
+                <thead className={style.tableHeader}>
+                    <tr className={style.tableHeaderTr}>
+                        <th>Nome</th>
+                        <th>Idade</th>
+                        <th>Nacionalidade</th>
+                    </tr>
+                </thead>
+                <tbody className={style.tbodyP}>
+                    {players.map((item) => (
+                        <tr className={style.tableBodyTr} key={item.id}>
+                            <td className={style.tableBodyTd}>{item.nome}</td>
+                            <td style={{ width: "33%", color: "white" }}>
+                                {item.idade}
+                            </td>
+                            <td style={{ width: "33%", color: "white" }}>
+                                {item.nacionalidade}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
 };

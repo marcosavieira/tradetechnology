@@ -1,0 +1,29 @@
+.tableFixture {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    padding: 1%;
+}
+.tableHeaderFixtures {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 6%;
+}
+.tableHeaderTrFixtures {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+
+tbody {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+tbody > tr {
+    display: flex;
+    justify-content: space-between;
+    width: 88%;
+}

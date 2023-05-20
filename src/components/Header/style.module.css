@@ -2,10 +2,10 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 90%;
+    width: 98%;
     height: 3rem;
     border-bottom: 1px solid black;
-    margin-left: 5rem;
+    margin-left: 2%;
     transition: opacity 0.5s ease;
 }
 
@@ -21,15 +21,15 @@ header span {
 .loading {
     position: absolute;
     top: 1.5rem;
-    left: 30rem;
+    left: 50%;
     width: 3rem;
     height: 3rem;
-    animation: girar 2s infinite linear;
 }
 
 .loading > img {
     width: 30px;
     height: 30px;
+    animation: girar 2s infinite linear;
 }
 
 @keyframes girar {
