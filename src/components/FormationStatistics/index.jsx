@@ -2,9 +2,9 @@ import style from "./style.module.css";
 
 export const FormationStatistics = ({ formation }) => {
     return (
-        <div style={{ width: "60%", height: "100%", border: "1px solid" }}>
-            <strong style={{ color: "green", padding: "2rem" }}>
-                Formações Mais Usadas
+        <div className={style.containerFormation}>
+            <strong style={{ color: "white", padding: "2rem" }}>
+                Formação Preferida
             </strong>
             <table className={style.tableFormaton}>
                 <thead className={style.tableHeaderFormation}>

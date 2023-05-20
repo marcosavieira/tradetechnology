@@ -1,0 +1,31 @@
+.containerChart {
+    display: flex;
+    width: 45%;
+    height: 80%;
+    margin-top: 10%;
+    position: relative;
+    bottom: 20%;
+    box-shadow: 0 0 10px 0 rgb(0, 0, 0, 1);
+    background: darkgray;
+    border-radius: 30px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.headerChart {
+    display: flex;
+    flex-direction: row;
+    width: 65%;
+    height: 24px;
+    margin-top: 8px;
+    border-radius: 30px;
+    align-items: center;
+    justify-content: space-between;
+    background: black;
+    box-shadow: 0 0 10px 0 rgb(0, 0, 0, 1);
+}
+
+.spanChart {
+    font-family: fantasy;
+    color: white;
+}
