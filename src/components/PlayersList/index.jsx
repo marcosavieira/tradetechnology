@@ -1,11 +1,16 @@
 import style from "./style.module.css";
 
-export const PlayersList = ({ players, playerRef }) => {
+export const PlayersList = ({ players, playerRef, team, season }) => {
     return (
         <div ref={playerRef} className={style.container}>
-            <strong style={{ color: "gray", marginLeft: "14%" }}>
-                Jogadores
-            </strong>
+            <div className={style.teamName}>
+                <strong style={{ color: "white", marginLeft: "20px" }}>
+                    {team}
+                </strong>
+                <strong style={{ color: "white", marginRight: "20px" }}>
+                    {season}
+                </strong>
+            </div>
             <table className={style.table}>
                 <thead className={style.tableHeader}>
                     <tr className={style.tableHeaderTr}>

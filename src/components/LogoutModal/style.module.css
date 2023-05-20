@@ -1,0 +1,36 @@
+.hidden {
+    display: none;
+}
+
+.modalWrapper {
+    position: fixed;
+    z-index: 50;
+    top: 5.5rem;
+    right: 12rem;
+}
+
+.modalTriangle {
+    position: relative;
+
+    width: 0;
+    height: 0;
+    border-bottom: 8.25px solid white;
+    border-left: 8.5px solid transparent;
+    border-right: 8.5px solid transparent;
+    z-index: 5;
+}
+
+.modalContent {
+    position: relative;
+
+    display: flex;
+    gap: 1rem;
+
+    right: 25%;
+
+    padding: 10px 20px;
+
+    background-color: white;
+    box-shadow: 0px 4px 42px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}

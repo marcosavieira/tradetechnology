@@ -20,6 +20,7 @@ export const Home = () => {
     const { isLoadingSeasons, dataSeasons /* error */ } = useAsync(GetSeasons);
     const [selectedLeagueOption, setSelectedLeagueOption] = useState("");
     const [selectedTeamOption, setSelectedTeamOption] = useState("");
+    const [teamName, setTeamName] = useState("");
     const [country, setCountry] = useState([]);
     const [players, setPlayers] = useState([]);
     const [formation, setFormation] = useState({});
@@ -55,6 +56,7 @@ export const Home = () => {
         }
         try {
             const response = await GetLeagues(country, option.value);
+
             setSeason(option.value);
             setLeague(response);
         } catch (error) {
@@ -88,6 +90,7 @@ export const Home = () => {
         try {
             const response = await GetPlayers(season, option.value);
             setPlayers(response);
+            setTeamName(option.label);
             setSelectedTeamOption(option.value);
         } catch (error) {
             console.log(error);
@@ -203,6 +206,8 @@ export const Home = () => {
                         {selectedTeamOption && (
                             <>
                                 <PlayersList
+                                    team={teamName}
+                                    season={season}
                                     players={players}
                                     playerRef={playerRef}
                                 />
@@ -222,19 +227,21 @@ export const Home = () => {
                                 )}
                             </>
                         )}
+                        {selectedTeamOption && formation && formation.goals && (
+                            <TeamChart
+                                timeA={formation.goals["0-15"].percentage}
+                                timeB={formation.goals["16-30"].percentage}
+                                timeC={formation.goals["31-45"].percentage}
+                                timeD={formation.goals["46-60"].percentage}
+                                timeE={formation.goals["61-75"].percentage}
+                                timeF={formation.goals["76-90"].percentage}
+                            />
+                        )}
                     </div>
-                    {selectedTeamOption && formation && formation.goals && (
-                        <TeamChart
-                            timeA={formation.goals["0-15"].percentage}
-                            timeB={formation.goals["16-30"].percentage}
-                            timeC={formation.goals["31-45"].percentage}
-                            timeD={formation.goals["46-60"].percentage}
-                            timeE={formation.goals["61-75"].percentage}
-                            timeF={formation.goals["76-90"].percentage}
-                        />
-                    )}
                     <div className={style.containerButton}>
-                        <button onClick={handleClearSelect}>Limpar</button>
+                        <button onClick={handleClearSelect}>
+                            Nova Pesquisa
+                        </button>
                     </div>
                 </div>
             </div>

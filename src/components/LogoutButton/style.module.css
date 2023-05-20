@@ -1,0 +1,19 @@
+.defaultIconButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    width: 1.5rem;
+
+    font-family: "Nunito", sans-serif;
+    font-weight: 600;
+    font-size: 0.5rem;
+    line-height: 0.625rem;
+    text-decoration: none;
+
+    color: var(--color-gray-600);
+
+    cursor: pointer;
+}

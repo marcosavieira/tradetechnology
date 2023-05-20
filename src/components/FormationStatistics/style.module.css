@@ -1,3 +1,11 @@
+.containerFormation {
+    width: 22%;
+    height: 100%;
+    box-shadow: 0 0 10px 0 rgb(0, 0, 0, 0.5);
+    background: darkgray;
+    border-radius: 30px;
+}
+
 .tableFormaton {
     height: 90%;
     display: flex;

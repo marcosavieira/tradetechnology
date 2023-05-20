@@ -1,3 +1,13 @@
+.containerFixtures {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px 0px;
+    background: darkgray;
+    border-radius: 30px;
+}
 .tableFixture {
     width: 100%;
     display: flex;

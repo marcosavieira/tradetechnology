@@ -1,4 +1,5 @@
 import { VictoryBar, VictoryChart, VictoryAxis } from "victory";
+import style from "./style.module.css";
 
 export const TeamChart = ({ timeA, timeB, timeC, timeD, timeE, timeF }) => {
     const data = [
@@ -11,17 +12,21 @@ export const TeamChart = ({ timeA, timeB, timeC, timeD, timeE, timeF }) => {
     ];
 
     return (
-        <div
-            style={{
-                display: "flex",
-                width: "52%",
-                height: "100%",
-                alignItems: "center",
-                border: "1px solid",
-                justifyContent: "center",
-                marginTop: "60%",
-            }}
-        >
+        <div className={style.containerChart}>
+            <div className={style.headerChart}>
+                <span
+                    style={{ marginLeft: "3rem" }}
+                    className={style.spanChart}
+                >
+                    % Gols
+                </span>
+                <span
+                    style={{ marginRight: "3rem" }}
+                    className={style.spanChart}
+                >
+                    Tempo de jogo
+                </span>
+            </div>
             <VictoryChart domainPadding={10}>
                 <VictoryAxis
                     tickValues={[1, 2, 3, 4, 5, 6]}
