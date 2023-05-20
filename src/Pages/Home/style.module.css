@@ -61,3 +61,9 @@
     align-items: center;
     justify-content: center;
 }
+
+label {
+    color: white;
+    font-family: fantasy;
+    letter-spacing: 2px;
+}
