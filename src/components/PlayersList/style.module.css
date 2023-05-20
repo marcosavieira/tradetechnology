@@ -4,6 +4,21 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 1);
     background: darkgrey;
+    margin-top: 1%;
+}
+
+.teamName {
+    border: 1px solid;
+    width: 71%;
+    height: 3rem;
+    margin-top: 15px;
+    margin-left: 12rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: black;
+    border-radius: 10px;
+    color: gray;
 }
 .table {
     height: 30rem;

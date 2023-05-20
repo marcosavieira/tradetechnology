@@ -46,8 +46,10 @@
     display: flex;
     flex-direction: column;
     gap: 24rem;
-    position: relative;
-    top: 45rem;
+    margin-top: 5%;
+    overflow: auto;
+    height: 36rem;
+    width: 143rem;
 }
 .containerPlayers {
     display: flex;
