@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import ball from "../../assets/flomar_Football_(soccer).svg";
 import { LogoutModal } from "../LogoutModal";
 import { ChevronIcon } from "../ChevronIcon";
+import { PlacarTimer } from "../PlacarTimer/index";
 
 export const Header = () => {
     const [name, setName] = useState("");
@@ -63,30 +64,31 @@ export const Header = () => {
                 {name ? (
                     <>
                         <span>Meu Time</span>
-                        {/*   // <span>{name.firstname}</span> */}
+
+                        <PlacarTimer />
+                        <div className={style.userProfileWrapper}>
+                            <div
+                                onClick={() =>
+                                    setOptionsModalHidden(!optionsModalHidden)
+                                }
+                                className={style.containerModal}
+                            >
+                                <ChevronIcon className={style.profileMenu} />
+                                <LogoutModal
+                                    openModal={toggleModalStatus}
+                                    isHidden={optionsModalHidden}
+                                />
+                                <span>{name.firstname}</span>
+                            </div>
+                        </div>
                     </>
                 ) : (
-                    <div className={style.loading}>
-                        <img src={ball} alt="" />
-                    </div>
+                    <>
+                        <div className={style.loading}>
+                            <img src={ball} alt="" />
+                        </div>
+                    </>
                 )}
-                <div className={style.userProfileWrapper}>
-                    {/* <ProfileImage src={""} name={name.firstname} /> */}
-
-                    <div
-                        onClick={() =>
-                            setOptionsModalHidden(!optionsModalHidden)
-                        }
-                        className={style.containerModal}
-                    >
-                        <ChevronIcon className={style.profileMenu} />
-                        <LogoutModal
-                            openModal={toggleModalStatus}
-                            isHidden={optionsModalHidden}
-                        />
-                        <span>{name.firstname}</span>
-                    </div>
-                </div>
             </header>
         </>
     );
