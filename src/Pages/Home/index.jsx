@@ -29,23 +29,30 @@ export const Home = () => {
     const [season, setSeason] = useState([]);
     const [dataSeason, setDataSeason] = useState([]);
 
-    const countryRef = useRef(null);
-    const seasonRef = useRef(null);
-    const leagueRef = useRef(null);
-    const teamRef = useRef(null);
-    const playerRef = useRef(null);
+    let countryRef = useRef(null);
+    let seasonRef = useRef(null);
+    let leagueRef = useRef(null);
+    let teamRef = useRef(null);
+    let playerRef = useRef(null);
+    let asyncCountry = useRef(null);
+    let asyncSeason = useRef(null)
+    let asyncLeague = useRef(null)
+    let asyncTime = useRef(null)
 
-    const handleSelectChange = async (option) => {
+    const handleSelectChangeCountry = async (option) => {
+        console.log('option', option)
         if (!option) {
             return;
         }
+        
         try {
+            setCountry(option.value);
             const response = await GetSeasons();
             setDataSeason(response);
-            setCountry(option.value);
         } catch (error) {
             console.log(error);
         }
+        
         if (seasonRef.current !== null) {
             seasonRef.current.scrollIntoView({ behavior: "smooth" });
         }
@@ -56,7 +63,6 @@ export const Home = () => {
         }
         try {
             const response = await GetLeagues(country, option.value);
-
             setSeason(option.value);
             setLeague(response);
         } catch (error) {
@@ -114,18 +120,17 @@ export const Home = () => {
     };
 
     const handleClearSelect = async () => {
-        console.log(countryRef);
         countryRef.current.scrollIntoView({ behavior: "smooth" });
         try {
-            setLeague("");
+            asyncCountry.current.clearValue();
+            asyncSeason.current.clearValue();
+            asyncLeague.current.clearValue();
+            asyncTime.current.clearValue();
             setCountry("");
+            setLeague("");
             setSeason("");
             setSelectedTeamOption("");
             setSelectedLeagueOption("");
-            seasonRef = null;
-            leagueRef = null;
-            teamRef = null;
-            playerRef = null;
         } catch (error) {
             console.log(error);
         }
@@ -141,23 +146,21 @@ export const Home = () => {
             <Header />
             <div className={style.container}>
                 <div className={style.containerScroll}>
-                    <div ref={countryRef} className={style.navBarCountries}>
-                        <label>Países</label>
-                        <AsyncSelect
-                            styles={{ width: "100%" }}
-                            cacheOptions
-                            defaultOptions
-                            loadOptions={GetCountries}
-                            isLoading={isLoading}
-                            options={data}
-                            onChange={handleSelectChange}
-                            isClearable
-                        />
-                    </div>
+                        <div ref={countryRef} className={style.navBarCountries}>
+                            <label>Países</label>
+                            <AsyncSelect
+                                cacheOptions
+                                defaultOptions
+                                loadOptions={GetCountries}
+                                isLoading={isLoading}
+                                options={data}
+                                onChange={handleSelectChangeCountry}
+                                isClearable
+                                ref={asyncCountry}
+                            />
+                        </div>
 
-                    {country !== "" && dataSeason && (
                         <div
-                            /* id="season" */
                             ref={seasonRef}
                             className={style.navBarSeasons}
                         >
@@ -170,11 +173,11 @@ export const Home = () => {
                                 options={dataSeasons}
                                 onChange={handleSelectChangeSeason}
                                 isClearable
+                                ref={asyncSeason}
                             />
                         </div>
-                    )}
 
-                    {league && (
+
                         <div ref={leagueRef} className={style.navBarLeagues}>
                             <label>Leagues</label>
                             <AsyncSelect
@@ -185,10 +188,11 @@ export const Home = () => {
                                 options={dataLeague}
                                 onChange={handleSelectChangeLeague}
                                 isClearable
+                                ref={asyncLeague}
                             />
                         </div>
-                    )}
-                    {leagueSelect !== "" && (
+                    
+
                         <div ref={teamRef} className={style.navBarLeagues}>
                             <label>Times</label>
                             <AsyncSelect
@@ -199,9 +203,10 @@ export const Home = () => {
                                 options={dataTeams}
                                 onChange={handleSelectChangeTeam}
                                 isClearable
+                                ref={asyncTime}
                             />
                         </div>
-                    )}
+                  
                     <div className={style.containerTables}>
                         {selectedTeamOption && (
                             <>
@@ -238,11 +243,11 @@ export const Home = () => {
                             />
                         )}
                     </div>
-                    <div className={style.containerButton}>
-                        <button onClick={handleClearSelect}>
-                            Nova Pesquisa
-                        </button>
-                    </div>
+                </div>
+                <div className={style.containerButton}>
+                    <button onClick={handleClearSelect}>
+                        Nova Pesquisa
+                    </button>
                 </div>
             </div>
         </>

@@ -10,15 +10,13 @@ export const Login = () => {
     const onSubmit = async (data) => {
         try {
             await GetStatus(data);
-        } catch (error) {
-            console.log(error);
-        }
-
-        setTimeout(() => {
+            navigate("/home");
             if (localStorage.length > 0) {
                 navigate("/home");
             }
-        }, 2000);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
