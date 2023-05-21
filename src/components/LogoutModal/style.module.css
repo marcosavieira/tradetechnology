@@ -5,8 +5,8 @@
 .modalWrapper {
     position: fixed;
     z-index: 50;
-    top: 5.5rem;
-    right: 12rem;
+    top: 3.5rem;
+    right: -1rem;
 }
 
 .modalTriangle {
