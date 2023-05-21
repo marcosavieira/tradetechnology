@@ -2,7 +2,7 @@ export const ChevronIcon = ({ className, size = 12 }) => {
     return (
         <svg
             className={className}
-            color="#747488"
+            color="white"
             width={size}
             height={size}
             viewBox="0 0 8 5"

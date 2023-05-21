@@ -35,16 +35,16 @@ export const Home = () => {
     let teamRef = useRef(null);
     let playerRef = useRef(null);
     let asyncCountry = useRef(null);
-    let asyncSeason = useRef(null)
-    let asyncLeague = useRef(null)
-    let asyncTime = useRef(null)
+    let asyncSeason = useRef(null);
+    let asyncLeague = useRef(null);
+    let asyncTime = useRef(null);
 
     const handleSelectChangeCountry = async (option) => {
-        console.log('option', option)
+        console.log("option", option);
         if (!option) {
             return;
         }
-        
+
         try {
             setCountry(option.value);
             const response = await GetSeasons();
@@ -52,7 +52,7 @@ export const Home = () => {
         } catch (error) {
             console.log(error);
         }
-        
+
         if (seasonRef.current !== null) {
             seasonRef.current.scrollIntoView({ behavior: "smooth" });
         }
@@ -146,67 +146,62 @@ export const Home = () => {
             <Header />
             <div className={style.container}>
                 <div className={style.containerScroll}>
-                        <div ref={countryRef} className={style.navBarCountries}>
-                            <label>Países</label>
-                            <AsyncSelect
-                                cacheOptions
-                                defaultOptions
-                                loadOptions={GetCountries}
-                                isLoading={isLoading}
-                                options={data}
-                                onChange={handleSelectChangeCountry}
-                                isClearable
-                                ref={asyncCountry}
-                            />
-                        </div>
+                    <div ref={countryRef} className={style.navBarCountries}>
+                        <label>Países</label>
+                        <AsyncSelect
+                            cacheOptions
+                            defaultOptions
+                            loadOptions={GetCountries}
+                            isLoading={isLoading}
+                            options={data}
+                            onChange={handleSelectChangeCountry}
+                            isClearable
+                            ref={asyncCountry}
+                        />
+                    </div>
 
-                        <div
-                            ref={seasonRef}
-                            className={style.navBarSeasons}
-                        >
-                            <label>Temporadas</label>
-                            <AsyncSelect
-                                cacheOptions
-                                defaultOptions
-                                loadOptions={GetSeasons}
-                                isLoading={isLoadingSeasons}
-                                options={dataSeasons}
-                                onChange={handleSelectChangeSeason}
-                                isClearable
-                                ref={asyncSeason}
-                            />
-                        </div>
+                    <div ref={seasonRef} className={style.navBarSeasons}>
+                        <label>Temporadas</label>
+                        <AsyncSelect
+                            cacheOptions
+                            defaultOptions
+                            loadOptions={GetSeasons}
+                            isLoading={isLoadingSeasons}
+                            options={dataSeasons}
+                            onChange={handleSelectChangeSeason}
+                            isClearable
+                            ref={asyncSeason}
+                        />
+                    </div>
 
+                    <div ref={leagueRef} className={style.navBarLeagues}>
+                        <label>Leagues</label>
+                        <AsyncSelect
+                            cacheOptions
+                            defaultOptions
+                            loadOptions={GetLeagues}
+                            isLoading={isLoadingLeague}
+                            options={dataLeague}
+                            onChange={handleSelectChangeLeague}
+                            isClearable
+                            ref={asyncLeague}
+                        />
+                    </div>
 
-                        <div ref={leagueRef} className={style.navBarLeagues}>
-                            <label>Leagues</label>
-                            <AsyncSelect
-                                cacheOptions
-                                defaultOptions
-                                loadOptions={GetLeagues}
-                                isLoading={isLoadingLeague}
-                                options={dataLeague}
-                                onChange={handleSelectChangeLeague}
-                                isClearable
-                                ref={asyncLeague}
-                            />
-                        </div>
-                    
+                    <div ref={teamRef} className={style.navBarLeagues}>
+                        <label>Times</label>
+                        <AsyncSelect
+                            cacheOptions
+                            defaultOptions
+                            loadOptions={GetTeams}
+                            isLoading={isLoadingTeams}
+                            options={dataTeams}
+                            onChange={handleSelectChangeTeam}
+                            isClearable
+                            ref={asyncTime}
+                        />
+                    </div>
 
-                        <div ref={teamRef} className={style.navBarLeagues}>
-                            <label>Times</label>
-                            <AsyncSelect
-                                cacheOptions
-                                defaultOptions
-                                loadOptions={GetTeams}
-                                isLoading={isLoadingTeams}
-                                options={dataTeams}
-                                onChange={handleSelectChangeTeam}
-                                isClearable
-                                ref={asyncTime}
-                            />
-                        </div>
-                  
                     <div className={style.containerTables}>
                         {selectedTeamOption && (
                             <>
@@ -245,9 +240,7 @@ export const Home = () => {
                     </div>
                 </div>
                 <div className={style.containerButton}>
-                    <button onClick={handleClearSelect}>
-                        Nova Pesquisa
-                    </button>
+                    <button onClick={handleClearSelect}>Nova Pesquisa</button>
                 </div>
             </div>
         </>

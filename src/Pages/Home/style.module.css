@@ -1,8 +1,8 @@
 .container {
-    width: 90%;
+    width: 70%;
     margin-top: 2rem;
     margin: auto;
-    background-color: #73817b;
+    background-color: rgba(0, 0, 0, 0.5);
     color: black;
     border-radius: 30px;
     box-shadow: 0 0 10px 0 rgb(0, 0, 0, 1);

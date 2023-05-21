@@ -33,7 +33,10 @@ body {
     min-width: 320px;
     width: 100%;
     height: 100vh;
-    background: #3d4450;
+    background-image: url("./assets/stadium.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 h1 {
