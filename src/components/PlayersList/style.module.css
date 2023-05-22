@@ -1,9 +1,10 @@
 .container {
-    height: 100%;
+    height: 80%;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 1);
-    background: darkgrey;
-    margin-top: 1%;
+    background: rgba(0, 0, 0, 0.5);
+    margin-top: 5%;
+    width: 70%;
 }
 
 .teamName {
@@ -21,7 +22,7 @@
     color: gray;
 }
 .table {
-    height: 30rem;
+    height: 90%;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -32,6 +33,7 @@
     width: 91%;
     align-items: center;
     justify-content: center;
+    margin-left: 7%;
 }
 
 .tableHeaderTr {
@@ -48,7 +50,7 @@
 
 .tbodyP {
     display: flex;
-    width: 77rem;
+    width: 100%;
     height: 25rem;
     flex-direction: column;
     overflow: auto;
@@ -56,7 +58,7 @@
 
 .tableBodyTr {
     display: flex;
-    width: 84%;
+    width: 78%;
     align-items: center;
     margin-left: 10rem;
     justify-content: space-between;
@@ -70,4 +72,5 @@
     flex-direction: row;
     justify-content: space-between;
     color: white;
+    margin-left: 8%;
 }

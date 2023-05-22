@@ -5,7 +5,8 @@
     flex-direction: column;
     padding: 2%;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px 0px;
-    background: darkgray;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
     border-radius: 30px;
 }
 .tableFixture {

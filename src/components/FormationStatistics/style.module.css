@@ -1,9 +1,10 @@
 .containerFormation {
-    width: 22%;
+    width: 40%;
     height: 100%;
     box-shadow: 0 0 10px 0 rgb(0, 0, 0, 0.5);
-    background: darkgray;
+    background: rgba(0, 0, 0, 0.5);
     border-radius: 30px;
+    color: white;
 }
 
 .tableFormaton {
