@@ -38,12 +38,38 @@ export const TeamChart = ({ timeA, timeB, timeC, timeD, timeE, timeF }) => {
                         "61-75",
                         "76-90",
                     ]}
+                    style={{
+                        axis: { stroke: "#ffffff" },
+                        ticks: { fill: "#FFFFFF", stroke: "#FFFFFF" },
+                        tickLabels: {
+                            fontSize: 15,
+                            padding: 5,
+                            fill: "#FFFFFF",
+                        },
+                        // Define a cor do texto para branco
+                        text: { fill: "white" },
+                    }}
                 />
                 <VictoryAxis
                     dependentAxis
-                    // tickFormat specifies how ticks should be displayed
+                    style={{
+                        // Adicionei a propriedade style aqui
+                        // Define a cor do texto para branco
+                        axis: { stroke: "white" },
+                        ticks: { fill: "white", stroke: "white" },
+                        tickLabels: { fill: "white" },
+                    }}
                 />
-                <VictoryBar data={data} x="quarter" y="earnings" />
+                <VictoryBar
+                    data={data}
+                    x="quarter"
+                    y="earnings"
+                    style={{
+                        data: { fill: "white", stroke: "#FFFFFF" },
+                        // Define a cor do texto para branco
+                        labels: { fill: "white" },
+                    }}
+                />
             </VictoryChart>
         </div>
     );

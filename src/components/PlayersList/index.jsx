@@ -14,7 +14,7 @@ export const PlayersList = ({ players, playerRef, team, season }) => {
             <table className={style.table}>
                 <thead className={style.tableHeader}>
                     <tr className={style.tableHeaderTr}>
-                        <th>Nome</th>
+                        <th style={{ marginLeft: "7%" }}>Nome</th>
                         <th>Idade</th>
                         <th>Nacionalidade</th>
                     </tr>
@@ -23,10 +23,22 @@ export const PlayersList = ({ players, playerRef, team, season }) => {
                     {players.map((item) => (
                         <tr className={style.tableBodyTr} key={item.id}>
                             <td className={style.tableBodyTd}>{item.nome}</td>
-                            <td style={{ width: "33%", color: "white" }}>
+                            <td
+                                style={{
+                                    width: "33%",
+                                    color: "white",
+                                    marginLeft: "4%",
+                                }}
+                            >
                                 {item.idade}
                             </td>
-                            <td style={{ width: "33%", color: "white" }}>
+                            <td
+                                style={{
+                                    width: "33%",
+                                    color: "white",
+                                    marginRight: "-13%",
+                                }}
+                            >
                                 {item.nacionalidade}
                             </td>
                         </tr>
