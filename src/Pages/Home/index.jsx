@@ -14,10 +14,6 @@ import { TeamChart } from "../../components/TeamChart";
 import { Header } from "../../components/Header";
 
 export const Home = () => {
-    const { isLoading, data /* error */ } = useAsync(GetCountries);
-    const { isLoadingLeague, dataLeague /* error */ } = useAsync(GetLeagues);
-    const { isLoadingTeams, dataTeams /* error */ } = useAsync(GetTeams);
-    const { isLoadingSeasons, dataSeasons /* error */ } = useAsync(GetSeasons);
     const [selectedLeagueOption, setSelectedLeagueOption] = useState("");
     const [selectedTeamOption, setSelectedTeamOption] = useState("");
     const [teamName, setTeamName] = useState("");
@@ -28,6 +24,10 @@ export const Home = () => {
     const [leagueSelect, setLeagueSelect] = useState([]);
     const [season, setSeason] = useState([]);
     const [dataSeason, setDataSeason] = useState([]);
+    const { isLoading, data /* error */ } = useAsync(GetCountries);
+    const { isLoadingLeague, dataLeague /* error */ } = useAsync(league);
+    const { isLoadingTeams, dataTeams /* error */ } = useAsync(GetTeams);
+    const { isLoadingSeasons, dataSeasons /* error */ } = useAsync(GetSeasons);
 
     let countryRef = useRef(null);
     let seasonRef = useRef(null);
@@ -61,8 +61,10 @@ export const Home = () => {
         if (!option) {
             return;
         }
+        const countryFormat = country.toLowerCase();
+
         try {
-            const response = await GetLeagues(country, option.value);
+            const response = await GetLeagues(countryFormat);
             setSeason(option.value);
             setLeague(response);
         } catch (error) {
@@ -162,44 +164,50 @@ export const Home = () => {
 
                     <div ref={seasonRef} className={style.navBarSeasons}>
                         <label>Temporadas</label>
-                        <AsyncSelect
-                            cacheOptions
-                            defaultOptions
-                            loadOptions={GetSeasons}
-                            isLoading={isLoadingSeasons}
-                            options={dataSeasons}
-                            onChange={handleSelectChangeSeason}
-                            isClearable
-                            ref={asyncSeason}
-                        />
+                        {country !== "" && (
+                            <AsyncSelect
+                                cacheOptions
+                                defaultOptions
+                                loadOptions={GetSeasons}
+                                isLoading={isLoadingSeasons}
+                                options={dataSeasons}
+                                onChange={handleSelectChangeSeason}
+                                isClearable
+                                ref={asyncSeason}
+                            />
+                        )}
                     </div>
 
                     <div ref={leagueRef} className={style.navBarLeagues}>
                         <label>Leagues</label>
-                        <AsyncSelect
-                            cacheOptions
-                            defaultOptions
-                            loadOptions={GetLeagues}
-                            isLoading={isLoadingLeague}
-                            options={dataLeague}
-                            onChange={handleSelectChangeLeague}
-                            isClearable
-                            ref={asyncLeague}
-                        />
+                        {season && (
+                            <AsyncSelect
+                                cacheOptions
+                                defaultOptions
+                                loadOptions={GetLeagues}
+                                isLoading={isLoadingLeague}
+                                options={dataLeague}
+                                onChange={handleSelectChangeLeague}
+                                isClearable
+                                ref={asyncLeague}
+                            />
+                        )}
                     </div>
 
                     <div ref={teamRef} className={style.navBarLeagues}>
                         <label>Times</label>
-                        <AsyncSelect
-                            cacheOptions
-                            defaultOptions
-                            loadOptions={GetTeams}
-                            isLoading={isLoadingTeams}
-                            options={dataTeams}
-                            onChange={handleSelectChangeTeam}
-                            isClearable
-                            ref={asyncTime}
-                        />
+                        {leagueSelect && (
+                            <AsyncSelect
+                                cacheOptions
+                                defaultOptions
+                                loadOptions={GetTeams}
+                                isLoading={isLoadingTeams}
+                                options={dataTeams}
+                                onChange={handleSelectChangeTeam}
+                                isClearable
+                                ref={asyncTime}
+                            />
+                        )}
                     </div>
 
                     <div className={style.containerTables}>
