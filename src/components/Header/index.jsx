@@ -13,7 +13,7 @@ export const Header = () => {
         const response = await GetStatus(apiKey);
         try {
             if (response) {
-                setName(response.account.firstname);
+                setName(response.response.account.firstname);
             }
         } catch (error) {
             console.log("", error);
