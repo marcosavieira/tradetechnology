@@ -8,14 +8,12 @@ import { PlacarTimer } from "../PlacarTimer/index";
 
 export const Header = () => {
     const [name, setName] = useState("");
-    const api = localStorage.getItem("apiKey");
+    const apiKey = localStorage.getItem("apiKey");
     const fetch = async () => {
-        const response = await GetStatus(api);
+        const response = await GetStatus(apiKey);
         try {
             if (response) {
-                setTimeout(() => {
-                    setName(response);
-                }, 3000);
+                setName(response.account.firstname);
             }
         } catch (error) {
             console.log("", error);
@@ -40,7 +38,7 @@ export const Header = () => {
 
     useEffect(() => {
         fetch();
-    });
+    }, []);
 
     /* const ProfileImage = ({ src, name }) => {
         return src !== "" ? (
@@ -78,7 +76,7 @@ export const Header = () => {
                                     openModal={toggleModalStatus}
                                     isHidden={optionsModalHidden}
                                 />
-                                <span>{name.firstname}</span>
+                                <span>{name}</span>
                             </div>
                         </div>
                     </>
