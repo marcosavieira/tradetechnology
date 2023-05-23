@@ -2,7 +2,8 @@ import style from "./style.module.css";
 import { GetCountries } from "../../services/GetCountries";
 import { GetLeagues } from "../../services/GetLeagues";
 import { useEffect, useRef, useState } from "react";
-import AsyncSelect, { useAsync } from "react-select/async";
+//import AsyncSelect, { useAsync } from "react-select/async";
+import Select from "react-select";
 import { GetSeasons } from "../../services/GetSeasons";
 import { GetTeams } from "../../services/GetTeams";
 import { PlayersList } from "../../components/PlayersList";
@@ -12,6 +13,7 @@ import { FormationStatistics } from "../../components/FormationStatistics";
 import { TeamFixtures } from "../../components/TeamFixtures";
 import { TeamChart } from "../../components/TeamChart";
 import { Header } from "../../components/Header";
+import { Await } from "react-router-dom";
 
 export const Home = () => {
     const [selectedLeagueOption, setSelectedLeagueOption] = useState("");
@@ -24,10 +26,9 @@ export const Home = () => {
     const [leagueSelect, setLeagueSelect] = useState([]);
     const [season, setSeason] = useState([]);
     const [dataSeason, setDataSeason] = useState([]);
-    const { isLoading, data /* error */ } = useAsync(GetCountries);
-    const { isLoadingLeague, dataLeague /* error */ } = useAsync(league);
-    const { isLoadingTeams, dataTeams /* error */ } = useAsync(GetTeams);
-    const { isLoadingSeasons, dataSeasons /* error */ } = useAsync(GetSeasons);
+    const [dataCountry, setDataCountry] = useState([]);
+    //const { isLoadingLeague, dataLeague /* error */ } = useAsync(league);
+    //const { isLoadingTeams, dataTeams /* error */ } = useAsync(GetTeams);
 
     let countryRef = useRef(null);
     let seasonRef = useRef(null);
@@ -40,7 +41,6 @@ export const Home = () => {
     let asyncTime = useRef(null);
 
     const handleSelectChangeCountry = async (option) => {
-        console.log("option", option);
         if (!option) {
             return;
         }
@@ -86,7 +86,6 @@ export const Home = () => {
             console.log(error);
         }
         if (teamRef.current !== null) {
-            console.log("entrou");
             teamRef.current.scrollIntoView({ behavior: "smooth" });
         }
     };
@@ -116,7 +115,6 @@ export const Home = () => {
             console.log(error);
         }
         if (playerRef.current !== null) {
-            console.log("entrou");
             playerRef.current.scrollIntoView({ behavior: "smooth" });
         }
     };
@@ -138,9 +136,20 @@ export const Home = () => {
         }
     };
 
+    /*  useEffect(() => {
+         GetCountries();
+        
+        
+    }, []); */
+
     useEffect(() => {
-        GetCountries();
-        /* seasonRef.current = document.getElementById("season"); */
+        if (!countryRef.current.value) {
+            const fetchData = async () => {
+                const response = await GetCountries();
+                setDataCountry(response);
+            };
+            fetchData();
+        }
     }, []);
 
     return (
@@ -150,14 +159,9 @@ export const Home = () => {
                 <div className={style.containerScroll}>
                     <div ref={countryRef} className={style.navBarCountries}>
                         <label>Países</label>
-                        <AsyncSelect
-                            cacheOptions
-                            defaultOptions
-                            loadOptions={GetCountries}
-                            isLoading={isLoading}
-                            options={data}
+                        <Select
+                            options={dataCountry}
                             onChange={handleSelectChangeCountry}
-                            isClearable
                             ref={asyncCountry}
                         />
                     </div>
@@ -165,14 +169,9 @@ export const Home = () => {
                     <div ref={seasonRef} className={style.navBarSeasons}>
                         <label>Temporadas</label>
                         {country !== "" && (
-                            <AsyncSelect
-                                cacheOptions
-                                defaultOptions
-                                loadOptions={GetSeasons}
-                                isLoading={isLoadingSeasons}
-                                options={dataSeasons}
+                            <Select
+                                options={dataSeason}
                                 onChange={handleSelectChangeSeason}
-                                isClearable
                                 ref={asyncSeason}
                             />
                         )}
@@ -181,14 +180,9 @@ export const Home = () => {
                     <div ref={leagueRef} className={style.navBarLeagues}>
                         <label>Leagues</label>
                         {season && (
-                            <AsyncSelect
-                                cacheOptions
-                                defaultOptions
-                                loadOptions={GetLeagues}
-                                isLoading={isLoadingLeague}
-                                options={dataLeague}
+                            <Select
+                                options={league}
                                 onChange={handleSelectChangeLeague}
-                                isClearable
                                 ref={asyncLeague}
                             />
                         )}
@@ -197,14 +191,9 @@ export const Home = () => {
                     <div ref={teamRef} className={style.navBarLeagues}>
                         <label>Times</label>
                         {leagueSelect && (
-                            <AsyncSelect
-                                cacheOptions
-                                defaultOptions
-                                loadOptions={GetTeams}
-                                isLoading={isLoadingTeams}
-                                options={dataTeams}
+                            <Select
+                                options={selectedLeagueOption}
                                 onChange={handleSelectChangeTeam}
-                                isClearable
                                 ref={asyncTime}
                             />
                         )}

@@ -4,7 +4,7 @@ import axios from "axios";
 //endpoint api : https://v3.football.api-sports.io
 
 export const API = axios.create({
-    baseURL: "https://v3.football.api-sports.io",
+    baseURL: "mock",
     timeout: 10000,
     headers: { "Content-Type": "application/json" },
 });
