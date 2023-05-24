@@ -7,19 +7,26 @@
     width: 70%;
 }
 
+.container img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: white;
+}
+
 .teamName {
     border: 1px solid;
-    width: 71%;
+    width: 80%;
     height: 3rem;
     margin-top: 15px;
     margin-left: 12rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 2px;
-    background: black;
+    justify-content: space-evenly;
+    background: white;
     border-radius: 10px;
-    color: gray;
+    margin-left: 17%;
+    margin-bottom: 2%;
 }
 .table {
     height: 90%;
