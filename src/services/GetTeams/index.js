@@ -29,6 +29,7 @@ export const GetTeams = async (season, league) => {
         const options = data.map((item) => ({
             value: item.team.id,
             label: item.team.name,
+            logo: item.team.logo,
         }));
         return options;
     } catch (error) {

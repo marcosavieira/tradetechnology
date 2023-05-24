@@ -19,6 +19,8 @@ export const reducer = (state, action) => {
             return { ...state, teamName: action.payload };
         case actionTypes.SET_TEAM_NAME_LABEL:
             return { ...state, teamNameLabel: action.payload };
+        case actionTypes.SET_TEAM_LOGO:
+            return { ...state, teamLogo: action.payload };
         case actionTypes.SET_PLAYERS:
             return { ...state, players: action.payload };
         case actionTypes.SET_FORMATION:

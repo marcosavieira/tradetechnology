@@ -8,6 +8,7 @@ export const initialState = {
     selectedLeagueOption: [],
     teamName: 0,
     teamNameLabel: "",
+    teamLogo: "",
     players: [],
     formation: {},
 };

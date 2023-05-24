@@ -28,6 +28,7 @@ export const Home = () => {
         selectedLeagueOption,
         teamName,
         teamNameLabel,
+        teamLogo,
         players,
         formation,
     } = state;
@@ -112,6 +113,10 @@ export const Home = () => {
                 type: actionTypes.SET_TEAM_NAME_LABEL,
                 payload: option.label,
             });
+            dispatch({
+                type: actionTypes.SET_TEAM_LOGO,
+                payload: option.logo,
+            });
             dispatch({ type: actionTypes.SET_PLAYERS, payload: response });
         } catch (error) {
             console.log(error);
@@ -160,7 +165,6 @@ export const Home = () => {
     };
 
     useEffect(() => {
-        console.log("Chamou o useEffect");
         if (!countryRef.current.value) {
             const fetchData = async () => {
                 const response = await GetCountries();
@@ -225,6 +229,7 @@ export const Home = () => {
                             <>
                                 <PlayersList
                                     team={teamNameLabel}
+                                    logo={teamLogo}
                                     season={season}
                                     players={players}
                                     playerRef={playerRef}

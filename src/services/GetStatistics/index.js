@@ -39,9 +39,6 @@ export const GetStatistics = async (leagueSelect, team, season) => {
             }
         );
         const dataStatics = response.data.response;
-        console.log(
-            `/teams/statistics?league=${leagueSelect}&team=${team}&season=${season}`
-        );
         const lineups = dataStatics.lineups;
         const fixtures = dataStatics.fixtures;
         const goals = dataStatics.goals.against.minute;
