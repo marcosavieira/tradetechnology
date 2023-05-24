@@ -31,6 +31,7 @@ export const Home = () => {
         players,
         formation,
     } = state;
+
     let countryRef = useRef(null);
     let seasonRef = useRef(null);
     let leagueRef = useRef(null);
@@ -126,7 +127,6 @@ export const Home = () => {
                     type: actionTypes.SET_FORMATION,
                     payload: response,
                 });
-                //setFormation(response);
             }
         } catch (error) {
             console.log(error);

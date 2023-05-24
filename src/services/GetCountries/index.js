@@ -1,7 +1,7 @@
 import { API } from "../API/api";
-import countries from "../../mocks/countries.json";
+//import countries from "../../mocks/countries.json";
 
-/* export const GetCountries = async () => {
+export const GetCountries = async () => {
     const apiKey = localStorage.getItem("apiKey");
     //fake: demo7870822.mockable.io
     //correct: v3.football.api-sports.io
@@ -22,8 +22,8 @@ import countries from "../../mocks/countries.json";
     } catch (error) {
         console.log("", error);
     }
-}; */
-export const GetCountries = async () => {
+};
+/* export const GetCountries = async () => {
     //chamada mock
     try {
         const response = countries;
@@ -37,3 +37,4 @@ export const GetCountries = async () => {
         console.log("", error);
     }
 };
+ */

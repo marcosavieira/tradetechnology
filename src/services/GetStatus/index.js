@@ -1,42 +1,25 @@
-//import { API } from "../API/api";
-import status from "../../mocks/status.json";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { API } from "../API/api";
+//import status from "../../mocks/status.json";
 
-/* export const GetStatus = async (data) => {
-    const notify = (msg) => {
-        if (msg === "sucess") {
-            toast.success("Login Efetuado !", {
-                position: toast.POSITION.TOP_RIGHT,
-            });
-        }
-        if (msg === "error") {
-            toast.error("Api Key inválida !", {
-                position: toast.POSITION.TOP_RIGHT,
-            });
-        }
-    };
+export const GetStatus = async (data) => {
     try {
-        //status;
         const response = await API.get("/status", {
             headers: {
-                "x-rapidapi-key": `${data.apiKey}`,
+                "x-rapidapi-key": `${data}`,
                 "x-rapidapi-host": "v3.football.api-sports.io",
             },
         });
-        if (response.data.errors.length === 0) {
-            localStorage.setItem("apiKey", `${data.apiKey}`);
-            notify("sucess");
-        } else {
-            notify("error");
+        if (response.data.response.account.firstname) {
+            localStorage.setItem("apiKey", `${data}`);
         }
+
         return response.data; ///api retorno
         // return response.response.account; //mock retorno
     } catch (error) {
         console.log(error);
     }
-}; */
-export const GetStatus = async () => {
+};
+/* export const GetStatus = async () => {
     const notify = (msg) => {
         if (msg === "sucess") {
             toast.success("Login Efetuado !", {
@@ -62,4 +45,4 @@ export const GetStatus = async () => {
     } catch (error) {
         console.log(error);
     }
-};
+}; */

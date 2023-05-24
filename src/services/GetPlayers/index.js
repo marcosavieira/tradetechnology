@@ -1,7 +1,7 @@
-//import { API } from "../API/api";
-import players from "../../mocks/players.json";
+import { API } from "../API/api";
+//import players from "../../mocks/players.json";
 
-export const GetPlayers = async () => {
+/* export const GetPlayers = async () => {
     const data = players.response;
     const list = data.map((item) => ({
         id: item.player.id,
@@ -10,8 +10,8 @@ export const GetPlayers = async () => {
         nacionalidade: item.player.nationality,
     }));
     return list;
-};
-/* export const GetPlayers = async (season, team) => {
+}; */
+export const GetPlayers = async (season, team) => {
     const apiKey = localStorage.getItem("apiKey");
     //fake: demo7870822.mockable.io
     //correct: v3.football.api-sports.io
@@ -39,4 +39,3 @@ export const GetPlayers = async () => {
         console.log("", error);
     }
 };
- */
