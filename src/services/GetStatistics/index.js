@@ -1,7 +1,7 @@
-//import { API } from "../API/api";
-import statistics from "../../mocks/statistics.json";
+import { API } from "../API/api";
+//import statistics from "../../mocks/statistics.json";
 
-export const GetStatistics = async (leagueSelect, team, season) => {
+/* export const GetStatistics = async (leagueSelect, team, season) => {
     const dataStatics = statistics.response;
     const lineups = dataStatics.lineups;
     const fixtures = dataStatics.fixtures;
@@ -23,8 +23,8 @@ export const GetStatistics = async (leagueSelect, team, season) => {
         fixtures: fixtures,
         goals: goals,
     };
-};
-/* export const GetStatistics = async (leagueSelect, team, season) => {
+}; */
+export const GetStatistics = async (leagueSelect, team, season) => {
     const apiKey = localStorage.getItem("apiKey");
     //fake: demo7870822.mockable.io
     //correct: v3.football.api-sports.io
@@ -39,10 +39,9 @@ export const GetStatistics = async (leagueSelect, team, season) => {
             }
         );
         const dataStatics = response.data.response;
-          console.log(
-   `/teams/statistics?league=${leagueSelect}&team=${team}&season=${season}`
-  ); 
-        //const dataStatics = statistics.response;
+        console.log(
+            `/teams/statistics?league=${leagueSelect}&team=${team}&season=${season}`
+        );
         const lineups = dataStatics.lineups;
         const fixtures = dataStatics.fixtures;
         const goals = dataStatics.goals.against.minute;
@@ -67,4 +66,3 @@ export const GetStatistics = async (leagueSelect, team, season) => {
         console.log("", error);
     }
 };
- */

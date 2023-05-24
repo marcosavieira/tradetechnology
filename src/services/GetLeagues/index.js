@@ -1,7 +1,7 @@
-//import { API } from "../API/api";
-import leagues from "../../mocks/leagues.json";
+import { API } from "../API/api";
+//import leagues from "../../mocks/leagues.json";
 
-export const GetLeagues = async () => {
+/* export const GetLeagues = async () => {
     try {
         const data = leagues.response;
         const options = data.map((item) => ({
@@ -12,8 +12,8 @@ export const GetLeagues = async () => {
     } catch (error) {
         console.log("", error);
     }
-};
-/* export const GetLeagues = async (country) => {
+}; */
+export const GetLeagues = async (country) => {
     const apiKey = localStorage.getItem("apiKey");
     //fake: demo7870822.mockable.io
     //correct: v3.football.api-sports.io
@@ -27,7 +27,6 @@ export const GetLeagues = async () => {
         });
         const data = response.data.response;
 
-        //const data = leagues.response;
         const options = data.map((item) => ({
             value: item.league.id,
             label: item.league.name,
@@ -36,4 +35,4 @@ export const GetLeagues = async () => {
     } catch (error) {
         console.log("", error);
     }
-}; */
+};
