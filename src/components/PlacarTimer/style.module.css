@@ -15,11 +15,11 @@
     align-items: center;
     width: fit-content;
     height: fit-content;
-    color: white;
+    color: black;
     font-family: fantasy;
     gap: 0.8rem;
     margin-right: 25px;
-    background: black;
+    background: white;
     border-radius: 12px;
 }
 
@@ -29,11 +29,11 @@
     align-items: center;
     width: fit-content;
     height: fit-content;
-    color: white;
+    color: black;
     font-family: fantasy;
     gap: 0.8rem;
     margin-left: 36px;
-    background: black;
+    background: white;
     border-radius: 15px;
     width: 4rem;
     justify-content: center;
