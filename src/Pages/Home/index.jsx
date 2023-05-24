@@ -1,8 +1,7 @@
 import style from "./style.module.css";
 import { GetCountries } from "../../services/GetCountries";
 import { GetLeagues } from "../../services/GetLeagues";
-import { useEffect, useRef, useState, useReducer } from "react";
-//import AsyncSelect, { useAsync } from "react-select/async";
+import { useEffect, useRef, useReducer } from "react";
 import Select from "react-select";
 import { GetSeasons } from "../../services/GetSeasons";
 import { GetTeams } from "../../services/GetTeams";
@@ -13,76 +12,11 @@ import { FormationStatistics } from "../../components/FormationStatistics";
 import { TeamFixtures } from "../../components/TeamFixtures";
 import { TeamChart } from "../../components/TeamChart";
 import { Header } from "../../components/Header";
+import { initialState } from "../../reducers/initialState";
+import { reducer } from "../../reducers/reducer";
+import { actionTypes } from "../../reducers/actionTypes";
 
 export const Home = () => {
-    // const [selectedLeagueOption, setSelectedLeagueOption] = useState("");
-    //const [teamName, setTeamName] = useState("");
-    //const [country, setCountry] = useState([]);
-    //const [players, setPlayers] = useState([]);
-    //const [formation, setFormation] = useState({});
-    //const [league, setLeague] = useState([]);
-    //const [leagueSelect, setLeagueSelect] = useState([]);
-    //const [season, setSeason] = useState([]);
-    //const [dataSeason, setDataSeason] = useState([]);
-    //const [dataCountry, setDataCountry] = useState([]);
-
-    const initialState = {
-        country: "",
-        dataCountry: [],
-        dataSeason: [],
-        season: 0,
-        league: [],
-        leagueSelect: [],
-        selectedLeagueOption: [],
-        teamName: 0,
-        teamNameLabel: "",
-        players: [],
-        formation: {},
-    };
-
-    const actionTypes = {
-        SET_COUNTRY: "SET_COUNTRY",
-        SET_DATA_COUNTRY: "SET_DATA_COUNTRY",
-        SET_DATA_SEASON: "SET_DATA_SEASON",
-        SET_SEASON: "SET_SEASON",
-        SET_LEAGUE: "SET_LEAGUE",
-        SET_LEAGUE_SELECT: "SET_LEAGUE_SELECT",
-        SET_LEAGUE_SELECT_OPTION: "SET_LEAGUE_SELECT_OPTION",
-        SET_TEAM_NAME: "SET_TEAM_NAME",
-        SET_PLAYERS: "SET_PLAYERS",
-        SET_FORMATION: "SET_FORMATION",
-        SET_TEAM_NAME_LABEL: "SET_TEAM_NAME_LABEL",
-    };
-
-    const reducer = (state, action) => {
-        switch (action.type) {
-            case actionTypes.SET_COUNTRY:
-                return { ...state, country: action.payload };
-            case actionTypes.SET_DATA_COUNTRY:
-                return { ...state, dataCountry: action.payload };
-            case actionTypes.SET_DATA_SEASON:
-                return { ...state, dataSeason: action.payload };
-            case actionTypes.SET_SEASON:
-                return { ...state, season: action.payload };
-            case actionTypes.SET_LEAGUE:
-                return { ...state, league: action.payload };
-            case actionTypes.SET_LEAGUE_SELECT:
-                return { ...state, leagueSelect: action.payload };
-            case actionTypes.SET_LEAGUE_SELECT_OPTION:
-                return { ...state, selectedLeagueOption: action.payload };
-            case actionTypes.SET_TEAM_NAME:
-                return { ...state, teamName: action.payload };
-            case actionTypes.SET_TEAM_NAME_LABEL:
-                return { ...state, teamNameLabel: action.payload };
-            case actionTypes.SET_PLAYERS:
-                return { ...state, players: action.payload };
-            case actionTypes.SET_FORMATION:
-                return { ...state, formation: action.payload };
-            default:
-                return state;
-        }
-    };
-
     const [state, dispatch] = useReducer(reducer, initialState);
     const {
         country,
