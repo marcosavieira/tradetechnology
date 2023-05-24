@@ -1,7 +1,7 @@
 import style from "./style.module.css";
 import { GetCountries } from "../../services/GetCountries";
 import { GetLeagues } from "../../services/GetLeagues";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useReducer } from "react";
 //import AsyncSelect, { useAsync } from "react-select/async";
 import Select from "react-select";
 import { GetSeasons } from "../../services/GetSeasons";
@@ -13,23 +13,90 @@ import { FormationStatistics } from "../../components/FormationStatistics";
 import { TeamFixtures } from "../../components/TeamFixtures";
 import { TeamChart } from "../../components/TeamChart";
 import { Header } from "../../components/Header";
-import { Await } from "react-router-dom";
 
 export const Home = () => {
-    const [selectedLeagueOption, setSelectedLeagueOption] = useState("");
-    const [selectedTeamOption, setSelectedTeamOption] = useState("");
-    const [teamName, setTeamName] = useState("");
-    const [country, setCountry] = useState([]);
-    const [players, setPlayers] = useState([]);
-    const [formation, setFormation] = useState({});
-    const [league, setLeague] = useState([]);
-    const [leagueSelect, setLeagueSelect] = useState([]);
-    const [season, setSeason] = useState([]);
-    const [dataSeason, setDataSeason] = useState([]);
-    const [dataCountry, setDataCountry] = useState([]);
-    //const { isLoadingLeague, dataLeague /* error */ } = useAsync(league);
-    //const { isLoadingTeams, dataTeams /* error */ } = useAsync(GetTeams);
+    // const [selectedLeagueOption, setSelectedLeagueOption] = useState("");
+    //const [teamName, setTeamName] = useState("");
+    //const [country, setCountry] = useState([]);
+    //const [players, setPlayers] = useState([]);
+    //const [formation, setFormation] = useState({});
+    //const [league, setLeague] = useState([]);
+    //const [leagueSelect, setLeagueSelect] = useState([]);
+    //const [season, setSeason] = useState([]);
+    //const [dataSeason, setDataSeason] = useState([]);
+    //const [dataCountry, setDataCountry] = useState([]);
 
+    const initialState = {
+        country: "",
+        dataCountry: [],
+        dataSeason: [],
+        season: 0,
+        league: [],
+        leagueSelect: [],
+        selectedLeagueOption: [],
+        teamName: 0,
+        teamNameLabel: "",
+        players: [],
+        formation: {},
+    };
+
+    const actionTypes = {
+        SET_COUNTRY: "SET_COUNTRY",
+        SET_DATA_COUNTRY: "SET_DATA_COUNTRY",
+        SET_DATA_SEASON: "SET_DATA_SEASON",
+        SET_SEASON: "SET_SEASON",
+        SET_LEAGUE: "SET_LEAGUE",
+        SET_LEAGUE_SELECT: "SET_LEAGUE_SELECT",
+        SET_LEAGUE_SELECT_OPTION: "SET_LEAGUE_SELECT_OPTION",
+        SET_TEAM_NAME: "SET_TEAM_NAME",
+        SET_PLAYERS: "SET_PLAYERS",
+        SET_FORMATION: "SET_FORMATION",
+        SET_TEAM_NAME_LABEL: "SET_TEAM_NAME_LABEL",
+    };
+
+    const reducer = (state, action) => {
+        switch (action.type) {
+            case actionTypes.SET_COUNTRY:
+                return { ...state, country: action.payload };
+            case actionTypes.SET_DATA_COUNTRY:
+                return { ...state, dataCountry: action.payload };
+            case actionTypes.SET_DATA_SEASON:
+                return { ...state, dataSeason: action.payload };
+            case actionTypes.SET_SEASON:
+                return { ...state, season: action.payload };
+            case actionTypes.SET_LEAGUE:
+                return { ...state, league: action.payload };
+            case actionTypes.SET_LEAGUE_SELECT:
+                return { ...state, leagueSelect: action.payload };
+            case actionTypes.SET_LEAGUE_SELECT_OPTION:
+                return { ...state, selectedLeagueOption: action.payload };
+            case actionTypes.SET_TEAM_NAME:
+                return { ...state, teamName: action.payload };
+            case actionTypes.SET_TEAM_NAME_LABEL:
+                return { ...state, teamNameLabel: action.payload };
+            case actionTypes.SET_PLAYERS:
+                return { ...state, players: action.payload };
+            case actionTypes.SET_FORMATION:
+                return { ...state, formation: action.payload };
+            default:
+                return state;
+        }
+    };
+
+    const [state, dispatch] = useReducer(reducer, initialState);
+    const {
+        country,
+        dataCountry,
+        dataSeason,
+        season,
+        league,
+        leagueSelect,
+        selectedLeagueOption,
+        teamName,
+        teamNameLabel,
+        players,
+        formation,
+    } = state;
     let countryRef = useRef(null);
     let seasonRef = useRef(null);
     let leagueRef = useRef(null);
@@ -46,9 +113,9 @@ export const Home = () => {
         }
 
         try {
-            setCountry(option.value);
+            dispatch({ type: actionTypes.SET_COUNTRY, payload: option.value });
             const response = await GetSeasons();
-            setDataSeason(response);
+            dispatch({ type: actionTypes.SET_DATA_SEASON, payload: response });
         } catch (error) {
             console.log(error);
         }
@@ -65,8 +132,8 @@ export const Home = () => {
 
         try {
             const response = await GetLeagues(countryFormat);
-            setSeason(option.value);
-            setLeague(response);
+            dispatch({ type: actionTypes.SET_SEASON, payload: option.value });
+            dispatch({ type: actionTypes.SET_LEAGUE, payload: response });
         } catch (error) {
             console.log(error);
         }
@@ -80,8 +147,14 @@ export const Home = () => {
         }
         try {
             const response = await GetTeams(season, option.value);
-            setLeagueSelect(option.value);
-            setSelectedLeagueOption(response);
+            dispatch({
+                type: actionTypes.SET_LEAGUE_SELECT,
+                payload: option.value,
+            });
+            dispatch({
+                type: actionTypes.SET_LEAGUE_SELECT_OPTION,
+                payload: response,
+            });
         } catch (error) {
             console.log(error);
         }
@@ -96,9 +169,15 @@ export const Home = () => {
         }
         try {
             const response = await GetPlayers(season, option.value);
-            setPlayers(response);
-            setTeamName(option.label);
-            setSelectedTeamOption(option.value);
+            dispatch({
+                type: actionTypes.SET_TEAM_NAME,
+                payload: option.value,
+            });
+            dispatch({
+                type: actionTypes.SET_TEAM_NAME_LABEL,
+                payload: option.label,
+            });
+            dispatch({ type: actionTypes.SET_PLAYERS, payload: response });
         } catch (error) {
             console.log(error);
         }
@@ -109,7 +188,11 @@ export const Home = () => {
                     option.value,
                     season
                 );
-                setFormation(response);
+                dispatch({
+                    type: actionTypes.SET_FORMATION,
+                    payload: response,
+                });
+                //setFormation(response);
             }
         } catch (error) {
             console.log(error);
@@ -126,27 +209,31 @@ export const Home = () => {
             asyncSeason.current.clearValue();
             asyncLeague.current.clearValue();
             asyncTime.current.clearValue();
-            setCountry("");
-            setLeague("");
-            setSeason("");
-            setSelectedTeamOption("");
-            setSelectedLeagueOption("");
+            dispatch({ type: actionTypes.SET_COUNTRY, payload: "" });
+            dispatch({ type: actionTypes.SET_LEAGUE, payload: "" });
+            dispatch({ type: actionTypes.SET_SEASON, payload: "" });
+            dispatch({
+                type: actionTypes.SET_LEAGUE_SELECT_OPTION,
+                payload: "",
+            });
+            dispatch({
+                type: actionTypes.SET_TEAM_NAME,
+                payload: "",
+            });
         } catch (error) {
             console.log(error);
         }
     };
 
-    /*  useEffect(() => {
-         GetCountries();
-        
-        
-    }, []); */
-
     useEffect(() => {
+        console.log("Chamou o useEffect");
         if (!countryRef.current.value) {
             const fetchData = async () => {
                 const response = await GetCountries();
-                setDataCountry(response);
+                dispatch({
+                    type: actionTypes.SET_DATA_COUNTRY,
+                    payload: response,
+                });
             };
             fetchData();
         }
@@ -178,7 +265,7 @@ export const Home = () => {
                     </div>
 
                     <div ref={leagueRef} className={style.navBarLeagues}>
-                        <label>Leagues</label>
+                        <label>Campeonatos</label>
                         {season && (
                             <Select
                                 options={league}
@@ -200,10 +287,10 @@ export const Home = () => {
                     </div>
 
                     <div className={style.containerTables}>
-                        {selectedTeamOption && (
+                        {teamName && (
                             <>
                                 <PlayersList
-                                    team={teamName}
+                                    team={teamNameLabel}
                                     season={season}
                                     players={players}
                                     playerRef={playerRef}
@@ -224,7 +311,7 @@ export const Home = () => {
                                 )}
                             </>
                         )}
-                        {selectedTeamOption && formation && formation.goals && (
+                        {teamName && formation && formation.goals && (
                             <TeamChart
                                 timeA={formation.goals["0-15"].percentage}
                                 timeB={formation.goals["16-30"].percentage}
